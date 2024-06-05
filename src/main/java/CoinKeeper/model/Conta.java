@@ -9,10 +9,12 @@ import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "contas")
 @Getter
+@SuperBuilder
 public class Conta extends Usuario {
     
     @Id
@@ -21,16 +23,16 @@ public class Conta extends Usuario {
     @Setter(AccessLevel.NONE)
     private Long id;
 
-    @Column(name = "id_usuario", nullable = false, unique = true)
+    @Column(name = "id_usuario", unique = true)
     private Long id_usuario;
 
     @Column(name = "saldo")
     private double saldo;
-
-    public Conta(String nome, String email, String senha, Usuario usuario) {
-        super(nome, email, senha);
-        this.id_usuario = usuario.getId();
+    
+    public Conta(Usuario user) {
+        super(null);
         this.saldo = 0.0;
+        this.id_usuario = user.getId();
     }
 
 }
