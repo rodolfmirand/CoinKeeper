@@ -13,7 +13,7 @@ public interface UsuarioService {
 
     UsuarioResponseDTO register(UsuarioRequestDTO usuario);
 
-    UsuarioResponseDTO update(UsuarioRequestDTO usuario);
+    UsuarioResponseDTO update(UsuarioRequestDTO usuario, Long id);
 
-    UsuarioResponseDTO delete(Long id);
+    String delete(Long id);
 }
