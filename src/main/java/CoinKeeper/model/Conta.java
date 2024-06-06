@@ -1,38 +1,46 @@
 package CoinKeeper.model;
 
+import java.util.UUID;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
 
 @Entity
+@Data
 @Table(name = "contas")
-@Getter
-@SuperBuilder
-public class Conta extends Usuario {
+@Builder
+public class Conta {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false, unique = true)
     @Setter(AccessLevel.NONE)
-    private Long id;
+    private UUID id;
 
-    @Column(name = "id_usuario", unique = true)
-    private Long id_usuario;
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
 
     @Column(name = "saldo")
     private double saldo;
     
-    public Conta(Usuario user) {
-        super(null);
+    @Builder
+    public Conta(Usuario usuario) {
         this.saldo = 0.0;
-        this.id_usuario = user.getId();
+        this.usuario = usuario;
     }
 
+    @Builder
+    public Conta(){}
 }

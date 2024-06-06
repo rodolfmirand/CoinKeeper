@@ -1,12 +1,15 @@
 package dto.response;
 
+import java.util.UUID;
+
+import CoinKeeper.model.Conta;
 import CoinKeeper.model.Usuario;
 import lombok.Getter;
 
 @Getter
 public class UsuarioResponseDTO {
 
-    private Long id;
+    private UUID id;
 
     private String nome;
 
@@ -14,11 +17,13 @@ public class UsuarioResponseDTO {
 
     private String senha;
 
+    private ContaResponseDTO conta;
+
     public UsuarioResponseDTO(Usuario usuario) {
         this.id = usuario.getId();
         this.nome = usuario.getNome();
         this.email = usuario.getEmail();
         this.senha = usuario.getSenha();
+        this.conta = new ContaResponseDTO(usuario.getConta());
     }
-
 }

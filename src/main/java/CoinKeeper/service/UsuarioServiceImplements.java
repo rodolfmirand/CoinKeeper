@@ -39,8 +39,9 @@ public class UsuarioServiceImplements implements UsuarioService {
     @Override
     public UsuarioResponseDTO register(UsuarioRequestDTO usuario) {
         Usuario user = userMapper.toUsuario(usuario);
-        Usuario conta = new Conta(user);
-        contaRepository.save((Conta) conta);
+        Conta conta = new Conta(user);
+        user.setConta(conta);
+        contaRepository.save(conta);
         return userMapper.toUsuarioResponseDTO(userRepository.save(user));
     }
 

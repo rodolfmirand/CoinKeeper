@@ -36,6 +36,8 @@ public class UsuarioController {
         return ResponseEntity.ok().body(service.findAll());
     }
 
+    
+
     @PostMapping
     public ResponseEntity<UsuarioResponseDTO> register(@RequestBody UsuarioRequestDTO userRequestDTO, UriComponentsBuilder uriBuilder) {
         UsuarioResponseDTO userResponseDTO = service.register(userRequestDTO);
