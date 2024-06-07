@@ -1,7 +1,9 @@
 package CoinKeeper.service;
 
+import java.util.List;
 import java.util.UUID;
 
+import dto.request.CategoriaRequestDTO;
 import dto.response.CategoriaResponseDTO;
 
 public interface CategoriaServiceImplements {
@@ -10,6 +12,10 @@ public interface CategoriaServiceImplements {
 
     List<CategoriaResponseDTO> findAll();
 
-    CategoriaResponseDTO register()
+    CategoriaResponseDTO register(CategoriaRequestDTO categoria);
+
+    CategoriaResponseDTO update(CategoriaRequestDTO categoria, Long id);
+
+    String delete(Long id);
     
 }
