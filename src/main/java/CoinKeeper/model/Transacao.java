@@ -21,7 +21,7 @@ import lombok.Setter;
 @Table(name = "transacoes")
 @Builder
 public class Transacao {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false, unique = true)
@@ -51,9 +51,8 @@ public class Transacao {
         this.conta = conta;
         this.categoria = categoria;
     }
-    
+
     @Builder
     public Transacao() {
-        
     }
 }

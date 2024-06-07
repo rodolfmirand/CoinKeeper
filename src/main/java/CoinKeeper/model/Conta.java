@@ -21,7 +21,7 @@ import lombok.Setter;
 @Table(name = "contas")
 @Builder
 public class Conta {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false, unique = true)
@@ -34,7 +34,7 @@ public class Conta {
 
     @Column(name = "saldo")
     private double saldo;
-    
+
     @Builder
     public Conta(Usuario usuario) {
         this.saldo = 0.0;
@@ -42,5 +42,6 @@ public class Conta {
     }
 
     @Builder
-    public Conta(){}
+    public Conta() {
+    }
 }
