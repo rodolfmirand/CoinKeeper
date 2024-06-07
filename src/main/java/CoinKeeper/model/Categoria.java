@@ -2,14 +2,15 @@ package CoinKeeper.model;
 
 import java.util.UUID;
 
+import com.vaadin.flow.component.template.Id;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -18,10 +19,10 @@ import lombok.Setter;
 
 @Data
 @Entity
-@Table(name = "usuarios")
+@Table(name = "categorias")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Builder
-public class Usuario {
+public class Categoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -32,24 +33,20 @@ public class Usuario {
     @Column(name = "nome", nullable = false, unique = true)
     private String nome;
 
-    @Column(name = "email", nullable = false, unique = true)
-    private String email;
+    @Column(name = "descricao", unique = true)
+    private String descricao;
 
-    @Column(name = "senha", nullable = false, unique = true)
-    private String senha;
-
-    @OneToOne
-    private Conta conta;
+    @OneToMany
+    private Transacao transacao;
 
     @Builder
-    public Usuario(String nome, String email, String senha, Conta conta) {
+    public Categoria(String nome, String descricao, Transacao transacao) {
         this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-        this.conta = conta;
+        this.descricao = descricao;
+        this.transacao = transacao;
     }
 
     @Builder
-    public Usuario() {
+    public Categoria() {
     }
 }
