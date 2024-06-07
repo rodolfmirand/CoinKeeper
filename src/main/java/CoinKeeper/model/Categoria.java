@@ -1,13 +1,13 @@
 package CoinKeeper.model;
 
+import java.util.List;
 import java.util.UUID;
-
-import com.vaadin.flow.component.template.Id;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.OneToMany;
@@ -37,10 +37,10 @@ public class Categoria {
     private String descricao;
 
     @OneToMany
-    private Transacao transacao;
+    private List<Transacao> transacao;
 
     @Builder
-    public Categoria(String nome, String descricao, Transacao transacao) {
+    public Categoria(String nome, String descricao, List<Transacao> transacao) {
         this.nome = nome;
         this.descricao = descricao;
         this.transacao = transacao;
