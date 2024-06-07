@@ -3,8 +3,11 @@ package CoinKeeper.controller;
 import java.net.URI;
 import java.util.List;
 
+import org.apache.el.lang.ELArithmetic.LongDelegate;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,5 +37,10 @@ public class CategoriasController {
 
         URI uri = uriBuilder.path("/categorias/{id}").buildAndExpand(categoriaResponseDTO.getId()).toUri();
         return ResponseEntity.created(uri).body(categoriaResponseDTO);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<String> delete(@PathVariable(value = "id") Long id){
+        return ResponseEntity.ok().body(service.delete(id));
     }
 }

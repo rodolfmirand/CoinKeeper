@@ -45,8 +45,8 @@ public class CategoriaServiceImplements implements CategoriaService {
 
     @Override
     public String delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        categoriaRepository.deleteById(id);
+        return "Categoria de id (" + id + ") deletada.";
     }
 
 }
