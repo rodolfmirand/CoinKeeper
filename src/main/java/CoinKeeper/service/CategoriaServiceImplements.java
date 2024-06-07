@@ -44,9 +44,9 @@ public class CategoriaServiceImplements implements CategoriaService {
     }
 
     @Override
-    public String delete(Long id) {
-        categoriaRepository.deleteById(id);
-        return "Categoria de id (" + id + ") deletada.";
+    public String delete(Categoria categoria) {
+        categoriaRepository.delete(categoria);
+        return "Categoria (" + categoria.getNome() + ") deletada.";
     }
 
 }

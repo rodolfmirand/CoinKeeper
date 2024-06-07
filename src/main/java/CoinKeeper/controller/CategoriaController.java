@@ -2,6 +2,7 @@ package CoinKeeper.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.el.lang.ELArithmetic.LongDelegate;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping(value = "/categorias")
 @RequiredArgsConstructor
-public class CategoriasController {
+public class CategoriaController {
     
     private final CategoriaService service;
 
@@ -40,7 +41,7 @@ public class CategoriasController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<String> delete(@PathVariable(value = "id") Long id){
+    public ResponseEntity<String> delete(@PathVariable(value = "id") UUID id){
         return ResponseEntity.ok().body(service.delete(id));
     }
 }

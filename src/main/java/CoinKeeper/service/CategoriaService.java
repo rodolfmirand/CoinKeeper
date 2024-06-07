@@ -3,6 +3,7 @@ package CoinKeeper.service;
 import java.util.List;
 import java.util.UUID;
 
+import CoinKeeper.model.Categoria;
 import dto.request.CategoriaRequestDTO;
 import dto.response.CategoriaResponseDTO;
 
@@ -16,6 +17,6 @@ public interface CategoriaService {
 
     CategoriaResponseDTO update(CategoriaRequestDTO categoria, Long id);
 
-    String delete(Long id);
+    String delete(Categoria categoria);
     
 }
