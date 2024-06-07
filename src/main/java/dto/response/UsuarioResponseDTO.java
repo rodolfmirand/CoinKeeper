@@ -2,7 +2,6 @@ package dto.response;
 
 import java.util.UUID;
 
-import CoinKeeper.model.Conta;
 import CoinKeeper.model.Usuario;
 import lombok.Getter;
 

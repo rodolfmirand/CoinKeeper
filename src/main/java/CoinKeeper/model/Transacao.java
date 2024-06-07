@@ -28,6 +28,9 @@ public class Transacao {
     @Setter(AccessLevel.NONE)
     private UUID id;
 
+    @Column(name = "tipo", nullable = false)
+    private String tipo;
+
     @Column(name = "data", nullable = false)
     private LocalDate data;
 

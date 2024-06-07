@@ -9,7 +9,6 @@ import CoinKeeper.model.Conta;
 import CoinKeeper.model.Usuario;
 import CoinKeeper.repository.ContaRepository;
 import CoinKeeper.repository.UsuarioRepository;
-import CoinKeeper.util.ContaMapper;
 import CoinKeeper.util.UsuarioMapper;
 import dto.request.UsuarioRequestDTO;
 import dto.response.UsuarioResponseDTO;
@@ -24,7 +23,6 @@ public class UsuarioServiceImplements implements UsuarioService {
     private final ContaRepository contaRepository;
 
     private final UsuarioMapper userMapper;
-    private final ContaMapper contaMapper;
 
     @Override
     public UsuarioResponseDTO findById(Long id) {
