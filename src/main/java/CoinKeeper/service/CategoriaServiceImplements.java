@@ -28,8 +28,7 @@ public class CategoriaServiceImplements implements CategoriaService {
 
     @Override
     public List<CategoriaResponseDTO> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+        return categoriaMapper.toCategoriasDTO(categoriaRepository.findAll());
     }
 
     @Override
