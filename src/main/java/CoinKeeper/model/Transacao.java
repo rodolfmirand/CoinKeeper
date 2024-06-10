@@ -1,7 +1,6 @@
 package CoinKeeper.model;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -9,8 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -41,14 +39,14 @@ public class Transacao {
     @Column(name = "descricao")
     private String descricao;
 
-    @ManyToMany
-    private List<Conta> conta;
+    @OneToOne
+    private Conta conta;
 
-    @OneToMany
-    private List<Categoria> categoria;
+    @OneToOne
+    private Categoria categoria;
 
     @Builder
-    public Transacao(double valor, String descricao, List<Conta> conta, List<Categoria> categoria) {
+    public Transacao(double valor, String descricao, Conta conta, Categoria categoria) {
         this.data = LocalDate.now();
         this.valor = valor;
         this.descricao = descricao;

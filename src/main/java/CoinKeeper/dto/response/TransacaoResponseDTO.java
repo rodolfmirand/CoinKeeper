@@ -3,7 +3,6 @@ package CoinKeeper.dto.response;
 import java.time.LocalDate;
 import java.util.UUID;
 
-import CoinKeeper.model.Conta;
 import CoinKeeper.model.Transacao;
 import lombok.Getter;
 
@@ -18,9 +17,7 @@ public class TransacaoResponseDTO {
 
     private double valor;
 
-    private String descricao;
-
-    private Conta conta;
+    private ContaResponseDTO conta;
 
     private CategoriaResponseDTO categoria;
 
@@ -29,8 +26,7 @@ public class TransacaoResponseDTO {
         this.tipo = transacao.getTipo();
         this.data = transacao.getData();
         this.valor = transacao.getValor();
-        this.descricao = transacao.getDescricao();
-        this.conta = transacao.getConta();
+        this.conta = new ContaResponseDTO(transacao.getConta());
         this.categoria = new CategoriaResponseDTO(transacao.getCategoria());
     }
 }

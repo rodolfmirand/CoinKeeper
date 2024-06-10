@@ -16,7 +16,7 @@ import CoinKeeper.service.TransacaoService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/transacoes/{id}")
+@RequestMapping("/transacoes")
 @RequiredArgsConstructor
 public class TransacaoController {
 

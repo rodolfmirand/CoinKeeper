@@ -1,6 +1,6 @@
 package CoinKeeper.dto.request;
 
-import java.time.LocalDate;
+import java.util.UUID;
 
 import CoinKeeper.model.Categoria;
 import CoinKeeper.model.Conta;
@@ -9,16 +9,10 @@ import lombok.Getter;
 @Getter
 public class TransacaoRequestDTO {
     
-    private String tipo;
-
-    private LocalDate data;
-
     private double valor;
 
-    private String descricao;
+    private UUID conta;
 
-    private Conta conta;
-
-    private Categoria categoria;
+    private UUID categoria;
 
 }

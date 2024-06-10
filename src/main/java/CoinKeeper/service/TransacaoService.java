@@ -10,7 +10,7 @@ public interface TransacaoService {
 
     List<TransacaoResponseDTO> findAll();
 
-    TransacaoResponseDTO register(TransacaoRequestDTO transacao, UUID id_usuario, UUID id_categoria);
+    TransacaoResponseDTO register(TransacaoRequestDTO transacao);
 
     String deleteById(UUID id);
 }
