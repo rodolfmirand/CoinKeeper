@@ -29,7 +29,8 @@ public class TransacaoServiceImplements implements TransacaoService {
 
     @Override
     public TransacaoResponseDTO register(TransacaoRequestDTO transacaoRequestDTO, UUID id_usuario, UUID id_categoria) {
-        Transacao transacao = new Tra
+        Transacao transacao = new Transacao();
+        transacao.setCategoria();
         return ;
     }
 

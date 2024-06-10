@@ -24,8 +24,8 @@ public class CategoriaServiceImplements implements CategoriaService {
 
     @Override
     public CategoriaResponseDTO findById(UUID id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+        return categoriaMapper.toCategoriaResponseDTO(categoriaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Categoria não encontrada do banco de dados.")));
     }
 
     @Override
@@ -46,7 +46,7 @@ public class CategoriaServiceImplements implements CategoriaService {
     }
 
     @Override
-    public String deleteById (UUID id) {
+    public String deleteById(UUID id) {
         categoriaRepository.deleteById(id);
         return "Categoria de id (" + id + ") deletada.";
     }
