@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import CoinKeeper.model.Categoria;
@@ -19,6 +20,7 @@ public class CategoriaServiceImplements implements CategoriaService {
 
     @Autowired
     private final CategoriaRepository categoriaRepository;
+    private JdbcTemplate jdbcTemplate;
 
     private final CategoriaMapper categoriaMapper;
 
@@ -46,9 +48,9 @@ public class CategoriaServiceImplements implements CategoriaService {
     }
 
     @Override
-    public String deleteById(UUID id) {
-        categoriaRepository.deleteById(id);
-        return  "Categoria deletada";
+    public int deleteById(UUID id) {
+        String sql = "DELETE FROM categorias WHERE id = ?"; 
+        return jdbcTemplate.update(sql, id);
     }
 
 }

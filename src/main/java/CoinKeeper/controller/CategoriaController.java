@@ -41,9 +41,9 @@ public class CategoriaController {
         URI uri = uriBuilder.path("/categorias/{id}").buildAndExpand(categoriaResponseDTO.getId()).toUri();
         return ResponseEntity.created(uri).body(categoriaResponseDTO);
     }
-
+    
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Integer> deleteById(@PathVariable(value = "id") UUID id) {
         return ResponseEntity.ok().body(service.deleteById(id));
     }
 }
