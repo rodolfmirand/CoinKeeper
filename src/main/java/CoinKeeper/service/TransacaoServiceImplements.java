@@ -63,5 +63,4 @@ public class TransacaoServiceImplements implements TransacaoService {
     private Conta searchConta(UUID id){
         return contaRepository.findById(id).orElse(null);
     }
-
 }
