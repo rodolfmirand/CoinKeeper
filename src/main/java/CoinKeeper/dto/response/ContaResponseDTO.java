@@ -1,4 +1,4 @@
-package dto.response;
+package CoinKeeper.dto.response;
 
 import java.util.UUID;
 

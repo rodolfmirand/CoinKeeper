@@ -5,9 +5,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
+import CoinKeeper.dto.request.CategoriaRequestDTO;
+import CoinKeeper.dto.response.CategoriaResponseDTO;
 import CoinKeeper.model.Categoria;
-import dto.request.CategoriaRequestDTO;
-import dto.response.CategoriaResponseDTO;
 
 @Component
 public class CategoriaMapper {

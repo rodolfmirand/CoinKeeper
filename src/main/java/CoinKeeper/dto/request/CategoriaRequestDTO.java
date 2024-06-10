@@ -1,4 +1,4 @@
-package dto.request;
+package CoinKeeper.dto.request;
 
 import lombok.Getter;
 

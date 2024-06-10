@@ -5,9 +5,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
+import CoinKeeper.dto.request.UsuarioRequestDTO;
+import CoinKeeper.dto.response.UsuarioResponseDTO;
 import CoinKeeper.model.Usuario;
-import dto.request.UsuarioRequestDTO;
-import dto.response.UsuarioResponseDTO;
 
 @Component
 public class UsuarioMapper {

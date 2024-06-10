@@ -3,8 +3,8 @@ package CoinKeeper.service;
 import java.util.List;
 import java.util.UUID;
 
-import dto.request.CategoriaRequestDTO;
-import dto.response.CategoriaResponseDTO;
+import CoinKeeper.dto.request.CategoriaRequestDTO;
+import CoinKeeper.dto.response.CategoriaResponseDTO;
 
 public interface CategoriaService {
 

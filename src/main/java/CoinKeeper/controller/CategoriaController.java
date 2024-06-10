@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import CoinKeeper.dto.request.CategoriaRequestDTO;
+import CoinKeeper.dto.response.CategoriaResponseDTO;
 import CoinKeeper.service.CategoriaService;
-import dto.request.CategoriaRequestDTO;
-import dto.response.CategoriaResponseDTO;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -34,11 +34,5 @@ public class CategoriaController {
     @PostMapping
     public ResponseEntity<CategoriaResponseDTO> register(@RequestBody CategoriaRequestDTO categoriaRequestDTO) {
         return ResponseEntity.ok().body(service.register(categoriaRequestDTO));
-    }
-    
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable(value = "id") UUID id) {
-        service.deleteById(id);
-        return ResponseEntity.noContent().build();
     }
 }

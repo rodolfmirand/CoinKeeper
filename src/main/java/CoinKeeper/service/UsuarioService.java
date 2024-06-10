@@ -2,8 +2,8 @@ package CoinKeeper.service;
 
 import java.util.List;
 
-import dto.request.UsuarioRequestDTO;
-import dto.response.UsuarioResponseDTO;
+import CoinKeeper.dto.request.UsuarioRequestDTO;
+import CoinKeeper.dto.response.UsuarioResponseDTO;
 
 public interface UsuarioService {
 

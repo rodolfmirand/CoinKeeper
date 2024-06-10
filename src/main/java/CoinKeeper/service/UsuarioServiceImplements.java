@@ -5,13 +5,13 @@ import java.util.List;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import CoinKeeper.dto.request.UsuarioRequestDTO;
+import CoinKeeper.dto.response.UsuarioResponseDTO;
 import CoinKeeper.model.Conta;
 import CoinKeeper.model.Usuario;
 import CoinKeeper.repository.ContaRepository;
 import CoinKeeper.repository.UsuarioRepository;
 import CoinKeeper.util.UsuarioMapper;
-import dto.request.UsuarioRequestDTO;
-import dto.response.UsuarioResponseDTO;
 import lombok.RequiredArgsConstructor;
 
 @Service

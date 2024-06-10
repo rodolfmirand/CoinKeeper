@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import CoinKeeper.dto.request.CategoriaRequestDTO;
+import CoinKeeper.dto.response.CategoriaResponseDTO;
 import CoinKeeper.model.Categoria;
 import CoinKeeper.repository.CategoriaRepository;
 import CoinKeeper.util.CategoriaMapper;
-import dto.request.CategoriaRequestDTO;
-import dto.response.CategoriaResponseDTO;
 import lombok.RequiredArgsConstructor;
 
 @Service
