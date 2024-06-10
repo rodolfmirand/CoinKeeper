@@ -1,8 +1,10 @@
 package CoinKeeper.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,11 +25,11 @@ public class UsuarioController {
 
     private final UsuarioService service;
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<UsuarioResponseDTO> findById(@PathVariable(name = "id") Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<UsuarioResponseDTO> findById(@PathVariable(name = "id") UUID id) {
         return ResponseEntity.ok().body(service.findById(id));
     }
-    
+
     @GetMapping()
     public ResponseEntity<List<UsuarioResponseDTO>> findAll() {
         return ResponseEntity.ok().body(service.findAll());
@@ -40,7 +42,12 @@ public class UsuarioController {
 
     @PutMapping("/{id}")
     public ResponseEntity<UsuarioResponseDTO> update(@RequestBody UsuarioRequestDTO userDTO,
-            @PathVariable(name = "id") Long id) {
+            @PathVariable(name = "id") UUID id) {
         return ResponseEntity.ok().body(service.update(userDTO, id));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable(value = "id") UUID id) {
+        return ResponseEntity.ok().body(service.deleteById(id));
     }
 }

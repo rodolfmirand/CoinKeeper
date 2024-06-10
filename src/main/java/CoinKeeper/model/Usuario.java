@@ -2,6 +2,10 @@ package CoinKeeper.model;
 
 import java.util.UUID;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -38,7 +42,7 @@ public class Usuario {
     @Column(name = "senha", nullable = false, unique = true)
     private String senha;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Conta conta;
 
     @Builder
