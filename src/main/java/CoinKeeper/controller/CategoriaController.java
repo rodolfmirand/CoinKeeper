@@ -4,7 +4,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
-import org.apache.el.lang.ELArithmetic.LongDelegate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +24,8 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping(value = "/categorias")
 @RequiredArgsConstructor
 public class CategoriaController {
-    
+
+    @Autowired
     private final CategoriaService service;
 
     @GetMapping
@@ -33,15 +34,16 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public ResponseEntity<CategoriaResponseDTO> register(@RequestBody CategoriaRequestDTO categoriaRequestDTO, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<CategoriaResponseDTO> register(@RequestBody CategoriaRequestDTO categoriaRequestDTO,
+            UriComponentsBuilder uriBuilder) {
         CategoriaResponseDTO categoriaResponseDTO = service.register(categoriaRequestDTO);
 
         URI uri = uriBuilder.path("/categorias/{id}").buildAndExpand(categoriaResponseDTO.getId()).toUri();
         return ResponseEntity.created(uri).body(categoriaResponseDTO);
     }
 
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<String> delete(@PathVariable(value = "id") UUID id){
-        return ResponseEntity.ok().body(service.delete(id));
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable(value = "id") UUID id) {
+        return ResponseEntity.ok().body(service.deleteById(id));
     }
 }

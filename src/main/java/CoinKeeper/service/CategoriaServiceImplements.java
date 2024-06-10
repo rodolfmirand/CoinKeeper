@@ -3,6 +3,7 @@ package CoinKeeper.service;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import CoinKeeper.model.Categoria;
@@ -16,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CategoriaServiceImplements implements CategoriaService {
 
+    @Autowired
     private final CategoriaRepository categoriaRepository;
 
     private final CategoriaMapper categoriaMapper;
@@ -44,9 +46,9 @@ public class CategoriaServiceImplements implements CategoriaService {
     }
 
     @Override
-    public String delete(Categoria categoria) {
-        categoriaRepository.delete(categoria);
-        return "Categoria (" + categoria.getNome() + ") deletada.";
+    public String deleteById(UUID id) {
+        categoriaRepository.deleteById(id);
+        return  "Categoria deletada";
     }
 
 }
