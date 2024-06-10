@@ -35,4 +35,9 @@ public class CategoriaController {
     public ResponseEntity<CategoriaResponseDTO> register(@RequestBody CategoriaRequestDTO categoriaRequestDTO) {
         return ResponseEntity.ok().body(service.register(categoriaRequestDTO));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable(value = "id") UUID id) {
+        return ResponseEntity.ok().body(service.deleteById(id));
+    }
 }

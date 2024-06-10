@@ -16,6 +16,6 @@ public interface CategoriaService {
 
     CategoriaResponseDTO update(CategoriaRequestDTO categoria, Long id);
 
-    int deleteById(UUID id);
+    String deleteById(UUID id);
     
 }
