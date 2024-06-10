@@ -1,4 +1,4 @@
-# CoinKeeper
+# CoinKeeper 💰
 
 CoinKeeper é um gerenciador de gastos pessoais desenvolvido em Java Spring Boot.
 
