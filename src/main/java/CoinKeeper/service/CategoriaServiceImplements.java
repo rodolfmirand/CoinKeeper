@@ -49,7 +49,7 @@ public class CategoriaServiceImplements implements CategoriaService {
 
     @Override
     public int deleteById(UUID id) {
-        String sql = "DELETE FROM categorias WHERE id = ?"; 
+        String sql = "DELETE FROM categorias WHERE id = ?;"; 
         return jdbcTemplate.update(sql, id);
     }
 

@@ -21,7 +21,7 @@ import dto.response.CategoriaResponseDTO;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping(value = "/categorias")
+@RequestMapping("/categorias")
 @RequiredArgsConstructor
 public class CategoriaController {
 
@@ -34,12 +34,8 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public ResponseEntity<CategoriaResponseDTO> register(@RequestBody CategoriaRequestDTO categoriaRequestDTO,
-            UriComponentsBuilder uriBuilder) {
-        CategoriaResponseDTO categoriaResponseDTO = service.register(categoriaRequestDTO);
-
-        URI uri = uriBuilder.path("/categorias/{id}").buildAndExpand(categoriaResponseDTO.getId()).toUri();
-        return ResponseEntity.created(uri).body(categoriaResponseDTO);
+    public ResponseEntity<CategoriaResponseDTO> register(@RequestBody CategoriaRequestDTO categoriaRequestDTO) {
+        return ResponseEntity.ok().body(service.register(categoriaRequestDTO));
     }
     
     @DeleteMapping("/{id}")
