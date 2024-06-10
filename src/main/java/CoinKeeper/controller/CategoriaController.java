@@ -1,6 +1,5 @@
 package CoinKeeper.controller;
 
-import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import CoinKeeper.service.CategoriaService;
 import dto.request.CategoriaRequestDTO;
@@ -39,7 +37,8 @@ public class CategoriaController {
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<Integer> deleteById(@PathVariable(value = "id") UUID id) {
-        return ResponseEntity.ok().body(service.deleteById(id));
+    public ResponseEntity<Void> deleteById(@PathVariable(value = "id") UUID id) {
+        service.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }

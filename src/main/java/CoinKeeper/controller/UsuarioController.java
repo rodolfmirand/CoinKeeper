@@ -36,14 +36,9 @@ public class UsuarioController {
         return ResponseEntity.ok().body(service.findAll());
     }
 
-    
-
     @PostMapping
-    public ResponseEntity<UsuarioResponseDTO> register(@RequestBody UsuarioRequestDTO userRequestDTO, UriComponentsBuilder uriBuilder) {
-        UsuarioResponseDTO userResponseDTO = service.register(userRequestDTO);
-
-        URI uri = uriBuilder.path("/users/{id}").buildAndExpand(userResponseDTO.getId()).toUri();
-        return ResponseEntity.created(uri).body(userResponseDTO);
+    public ResponseEntity<UsuarioResponseDTO> register(@RequestBody UsuarioRequestDTO userRequestDTO) {
+        return ResponseEntity.ok().body(service.register(userRequestDTO));
     }
 
     @PutMapping(value = "/{id}")
