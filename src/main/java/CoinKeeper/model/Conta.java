@@ -44,4 +44,13 @@ public class Conta {
     @Builder
     public Conta() {
     }
+
+    public Double updateSaldo(double valor) {
+        if (valor > this.saldo)
+            return -1d;
+
+        double novoSaldo = this.saldo - valor;
+        this.setSaldo(novoSaldo);
+        return novoSaldo;
+    }
 }

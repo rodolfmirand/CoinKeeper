@@ -41,12 +41,21 @@ public class TransacaoServiceImplements implements TransacaoService {
     @Override
     public TransacaoResponseDTO register(TransacaoRequestDTO transacaoRequestDTO) {
         Transacao transacao = new Transacao();
-        transacao.setCategoria(searchCategoria(transacaoRequestDTO.getCategoria()));
         transacao.setConta(searchConta(transacaoRequestDTO.getConta()));
         transacao.setValor(transacaoRequestDTO.getValor());
+        transacao.setCategoria(searchCategoria(transacaoRequestDTO.getCategoria()));
         transacao.setData(LocalDate.now());
         transacao.setTipo(transacao.getCategoria().getNome());
+
+        Conta conta = transacao.getConta();
+        double responseUpdateSaldo = conta.updateSaldo(transacao.getValor());
+
+        if (responseUpdateSaldo == -1)
+            return null;
+
         transacaoRepository.save(transacao);
+        contaRepository.save(conta);
+
         return new TransacaoResponseDTO(transacao);
     }
 
@@ -56,11 +65,11 @@ public class TransacaoServiceImplements implements TransacaoService {
         throw new UnsupportedOperationException("Unimplemented method 'deleteById'");
     }
 
-    private Categoria searchCategoria(UUID id){
+    private Categoria searchCategoria(UUID id) {
         return categoriaRepository.findById(id).orElse(null);
     }
 
-    private Conta searchConta(UUID id){
+    private Conta searchConta(UUID id) {
         return contaRepository.findById(id).orElse(null);
     }
 }

@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import CoinKeeper.dto.request.UpdateLimiteRequestDTO;
 import CoinKeeper.dto.request.UsuarioRequestDTO;
 import CoinKeeper.dto.response.ContaResponseDTO;
 import CoinKeeper.dto.response.UsuarioResponseDTO;
-import CoinKeeper.model.Conta;
 import CoinKeeper.service.ContaService;
 import CoinKeeper.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
@@ -48,9 +48,9 @@ public class UsuarioController {
         return ResponseEntity.ok().body(service.register(userRequestDTO));
     }
 
-    @PostMapping("/{id}/{valor}")
-    public ResponseEntity<ContaResponseDTO> updateLimiteConta(@PathVariable(value = "id") UUID id, @PathVariable(value = "valor") double valor){
-        return ResponseEntity.ok().body(contaService.uptadeLimite(id, valor));
+    @PostMapping("/conta/limite")
+    public ResponseEntity<ContaResponseDTO> updateLimiteConta(@RequestBody UpdateLimiteRequestDTO limiteRequest){
+        return ResponseEntity.ok().body(contaService.uptadeLimite(limiteRequest.getId_conta(), limiteRequest.getValor()));
     }
 
     @PutMapping("/{id}")
