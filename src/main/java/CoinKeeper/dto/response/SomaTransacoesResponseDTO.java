@@ -13,9 +13,9 @@ public class SomaTransacoesResponseDTO {
 
     private double somaValores;
 
-    public SomaTransacoesResponseDTO(UUID categoria, double somaValores, UUID conta) {
+    public SomaTransacoesResponseDTO(UUID categoria, UUID conta, double somaValores ) {
         this.categoria = categoria;
-        this.somaValores = somaValores;
         this.conta = conta;
+        this.somaValores = somaValores;
     }
 }

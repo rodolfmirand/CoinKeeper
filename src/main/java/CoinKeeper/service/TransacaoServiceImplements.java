@@ -78,13 +78,13 @@ public class TransacaoServiceImplements implements TransacaoService {
         return contaRepository.findById(id).orElse(null);
     }
 
-    public List<SomaTransacoesResponseDTO> getTotalGasto(Transacao transacao) {
-        String sql = "SELECT categoria_id AS categoria, SUM(valor) AS somaValores " +
-                "FROM transacoes " +
-                "GROUP BY categoria_id " +
-                "WHERE conta_id = " + transacao.getConta().getId() + ";" ;
+    public SomaTransacoesResponseDTO getTotalGasto(Transacao transacao) {
+        String sql = "SELECT SUM(valor) AS somaValores " +
+        "FROM transacoes " + 
+        "WHERE categoria_id = '" + transacao.getCategoria().getId() + "' " + 
+        "AND conta_id = '" + transacao.getConta().getId() + "';";
 
-        return jdbcTemplate.queryForList(sql, SomaTransacoesResponseDTO.class);
+        return new SomaTransacoesResponseDTO(transacao.getCategoria().getId(), transacao.getConta().getId(), jdbcTemplate.queryForObject(sql, Float.class));
     }
 
 }

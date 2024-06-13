@@ -16,5 +16,5 @@ public interface TransacaoService {
 
     String deleteById(UUID id);
 
-    List<SomaTransacoesResponseDTO> getTotalGasto(Transacao transacao);
+    SomaTransacoesResponseDTO getTotalGasto(Transacao transacao);
 }

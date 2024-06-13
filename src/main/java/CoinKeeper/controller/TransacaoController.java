@@ -26,6 +26,7 @@ public class TransacaoController {
     @Autowired
     private final TransacaoService service;
 
+    @Autowired
     private TransacaoMapper mapper;
 
     @GetMapping
@@ -34,7 +35,7 @@ public class TransacaoController {
     }
 
     @GetMapping("/totais")
-    public ResponseEntity<List<SomaTransacoesResponseDTO>> getTotalGasto(@RequestBody SomaTransacoesRequestDTO request) {
+    public ResponseEntity<SomaTransacoesResponseDTO> getTotalGasto(@RequestBody SomaTransacoesRequestDTO request) {
         return ResponseEntity.ok().body(service.getTotalGasto(mapper.totalRequestToTransacao(request)));
     }
 
