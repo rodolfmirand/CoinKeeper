@@ -51,4 +51,9 @@ public class CategoriaServiceImplements implements CategoriaService {
         return "Categoria de id (" + id + ") deletada.";
     }
 
+    @Override
+    public Categoria findByIdConta(UUID id) {
+        return categoriaRepository.findById(id).get();
+    }
+
 }

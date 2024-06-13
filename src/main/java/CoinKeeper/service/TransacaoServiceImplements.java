@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import CoinKeeper.dto.request.TransacaoRequestDTO;
+import CoinKeeper.dto.response.SomaTransacoesResponseDTO;
 import CoinKeeper.dto.response.TransacaoResponseDTO;
 import CoinKeeper.model.Categoria;
 import CoinKeeper.model.Conta;
@@ -21,6 +23,9 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class TransacaoServiceImplements implements TransacaoService {
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Autowired
     private final TransacaoRepository transacaoRepository;
@@ -72,4 +77,14 @@ public class TransacaoServiceImplements implements TransacaoService {
     private Conta searchConta(UUID id) {
         return contaRepository.findById(id).orElse(null);
     }
+
+    public List<SomaTransacoesResponseDTO> getTotalGasto(Transacao transacao) {
+        String sql = "SELECT categoria_id AS categoria, SUM(valor) AS somaValores " +
+                "FROM transacoes " +
+                "GROUP BY categoria_id " +
+                "WHERE conta_id = " + transacao.getConta().getId() + ";" ;
+
+        return jdbcTemplate.queryForList(sql, SomaTransacoesResponseDTO.class);
+    }
+
 }

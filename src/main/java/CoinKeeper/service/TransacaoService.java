@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.UUID;
 
 import CoinKeeper.dto.request.TransacaoRequestDTO;
+import CoinKeeper.dto.response.SomaTransacoesResponseDTO;
 import CoinKeeper.dto.response.TransacaoResponseDTO;
+import CoinKeeper.model.Transacao;
 
 public interface TransacaoService {
 
@@ -13,4 +15,6 @@ public interface TransacaoService {
     TransacaoResponseDTO register(TransacaoRequestDTO transacao);
 
     String deleteById(UUID id);
+
+    List<SomaTransacoesResponseDTO> getTotalGasto(Transacao transacao);
 }
