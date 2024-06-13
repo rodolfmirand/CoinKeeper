@@ -80,11 +80,12 @@ public class TransacaoServiceImplements implements TransacaoService {
 
     public SomaTransacoesResponseDTO getTotalGasto(Transacao transacao) {
         String sql = "SELECT SUM(valor) AS somaValores " +
-        "FROM transacoes " + 
-        "WHERE categoria_id = '" + transacao.getCategoria().getId() + "' " + 
-        "AND conta_id = '" + transacao.getConta().getId() + "';";
+                "FROM transacoes " +
+                "WHERE categoria_id = '" + transacao.getCategoria().getId() + "' " +
+                "AND conta_id = '" + transacao.getConta().getId() + "';";
 
-        return new SomaTransacoesResponseDTO(transacao.getCategoria().getId(), transacao.getConta().getId(), jdbcTemplate.queryForObject(sql, Float.class));
+        return new SomaTransacoesResponseDTO(transacao.getCategoria().getId(), transacao.getConta().getId(),
+                jdbcTemplate.queryForObject(sql, Float.class));
     }
 
 }

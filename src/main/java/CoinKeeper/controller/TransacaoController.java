@@ -34,7 +34,7 @@ public class TransacaoController {
         return ResponseEntity.ok().body(service.findAll());
     }
 
-    @GetMapping("/totais")
+    @GetMapping("/total")
     public ResponseEntity<SomaTransacoesResponseDTO> getTotalGasto(@RequestBody SomaTransacoesRequestDTO request) {
         return ResponseEntity.ok().body(service.getTotalGasto(mapper.totalRequestToTransacao(request)));
     }
