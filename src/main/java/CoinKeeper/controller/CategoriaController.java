@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import CoinKeeper.dto.request.CategoriaRequestDTO;
+import CoinKeeper.dto.request.CategoriaUpdateRequestDTO;
 import CoinKeeper.dto.response.CategoriaResponseDTO;
 import CoinKeeper.service.CategoriaService;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +36,11 @@ public class CategoriaController {
     @PostMapping
     public ResponseEntity<CategoriaResponseDTO> register(@RequestBody CategoriaRequestDTO categoriaRequestDTO) {
         return ResponseEntity.ok().body(service.register(categoriaRequestDTO));
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<CategoriaResponseDTO> update(@RequestBody CategoriaUpdateRequestDTO categoriaUpdate) {
+        return ResponseEntity.ok().body(service.update(categoriaUpdate, categoriaUpdate.getId()));
     }
 
     @DeleteMapping("/{id}")

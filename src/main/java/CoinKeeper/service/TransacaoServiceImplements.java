@@ -66,8 +66,8 @@ public class TransacaoServiceImplements implements TransacaoService {
 
     @Override
     public String deleteById(UUID id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteById'");
+        transacaoRepository.deleteById(id);
+        return "Categoria de id (" + id + ") deletada.";
     }
 
     private Categoria searchCategoria(UUID id) {

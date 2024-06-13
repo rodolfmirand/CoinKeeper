@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import CoinKeeper.dto.request.CategoriaRequestDTO;
+import CoinKeeper.dto.request.CategoriaUpdateRequestDTO;
 import CoinKeeper.dto.response.CategoriaResponseDTO;
 import CoinKeeper.model.Categoria;
 
@@ -17,7 +18,7 @@ public interface CategoriaService {
 
     CategoriaResponseDTO register(CategoriaRequestDTO categoria);
 
-    CategoriaResponseDTO update(CategoriaRequestDTO categoria, Long id);
+    CategoriaResponseDTO update(CategoriaUpdateRequestDTO categoria, UUID id);
 
     String deleteById(UUID id);
     
