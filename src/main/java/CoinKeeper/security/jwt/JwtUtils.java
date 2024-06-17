@@ -27,12 +27,22 @@ public class JwtUtils {
     @Value("${CoinKeeper.jwtExpirationMs}")
     private int jwtExpirationMs; // tempo que o token vai ficar válido
 
-    public String generateTokenFromuserDetailsImp(UserDetailsImpl userDetails) {
+    public String generateTokenFromUserDetailsImp(UserDetailsImpl userDetails) {
+        return buildJwtToken(userDetails.getUsername(), jwtExpirationMs);
+    }
+
+    private String buildJwtToken(String subject, long expirationMs) {
+        Date now = new Date();
+        Date expiryDate = new Date(now.getTime() + expirationMs);
+
+        Key key = getSigningKey();
+
         return Jwts.builder()
-                .setSubject(userDetails.getUsername())
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(new Date().getTime() + jwtExpirationMs))
-                .signWith(getSigningKey(), SignatureAlgorithm.HS512).compact();
+                .setSubject(subject)
+                .setIssuedAt(now)
+                .setExpiration(expiryDate)
+                .signWith(key, SignatureAlgorithm.HS512)
+                .compact();
     }
 
     private Key getSigningKey() {
@@ -41,7 +51,7 @@ public class JwtUtils {
     }
 
     private boolean validateJwtToken(String authToken) {
-        
+
         try {
             Jwts.parser().setSigningKey(getSigningKey()).build().parseClaimsJws(authToken);
             return true;
