@@ -21,10 +21,10 @@ import io.jsonwebtoken.security.Keys;
 @Component
 public class JwtUtils {
 
-    @Value("${CoinKeeper.jwtSecret}")
+    @Value("${coinkeeper.jwtSecret}")
     private String jwtSecret; // password
 
-    @Value("${CoinKeeper.jwtExpirationMs}")
+    @Value("${coinkeeper.jwtExpirationMs}")
     private int jwtExpirationMs; // tempo que o token vai ficar válido
 
     public String generateTokenFromUserDetailsImp(UserDetailsImpl userDetails) {
