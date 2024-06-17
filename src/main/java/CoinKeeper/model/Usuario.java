@@ -46,8 +46,9 @@ public class Usuario {
     private Conta conta;
 
     @Builder
-    public Usuario(String nome, String email, String senha, Conta conta) {
+    public Usuario(String nome, String login, String email, String senha, Conta conta) {
         this.nome = nome;
+        this.login = login;
         this.email = email;
         this.senha = senha;
         this.conta = conta;

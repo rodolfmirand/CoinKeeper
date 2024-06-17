@@ -22,7 +22,7 @@ public class UserDetailsImpl implements UserDetails {
     public static UserDetailsImpl build(Usuario user) {
         return new UserDetailsImpl(
                 user.getId(),
-                user.getNome(),
+                user.getLogin(),
                 user.getEmail(),
                 user.getSenha(),
                 new ArrayList<>());

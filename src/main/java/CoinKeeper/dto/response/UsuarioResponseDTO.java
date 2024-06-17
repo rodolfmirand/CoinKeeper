@@ -12,6 +12,8 @@ public class UsuarioResponseDTO {
 
     private String nome;
 
+    private String login;
+
     private String email;
 
     private String senha;
@@ -21,6 +23,7 @@ public class UsuarioResponseDTO {
     public UsuarioResponseDTO(Usuario usuario) {
         this.id = usuario.getId();
         this.nome = usuario.getNome();
+        this.login = usuario.getLogin();
         this.email = usuario.getEmail();
         this.senha = usuario.getSenha();
         this.conta = new ContaResponseDTO(usuario.getConta());

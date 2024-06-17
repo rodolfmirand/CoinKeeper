@@ -11,8 +11,10 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import CoinKeeper.security.jwt.AuthEntryPointJwt;
+import CoinKeeper.security.jwt.AuthFilterToken;
 
 @Configuration
 @EnableMethodSecurity
@@ -33,12 +35,21 @@ public class WebSecurityConfig {
     }
 
     @Bean
+    public AuthFilterToken authFilterToken(){
+        return new AuthFilterToken();
+    }
+
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll());
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/users/**").permitAll()
+                        .anyRequest().authenticated());
+        // remover o .requestMatchers("/users/**")
 
+        http.addFilterBefore(authFilterToken(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 }

@@ -20,6 +20,7 @@ public class UsuarioMapper {
     public Usuario toUsuario(UsuarioRequestDTO userDTO) {
         return Usuario.builder()
                 .nome(userDTO.getNome())
+                .login(userDTO.getLogin())
                 .email(userDTO.getEmail())
                 .senha(passwordEncoder.encode(userDTO.getSenha()))
                 .build();
@@ -35,6 +36,7 @@ public class UsuarioMapper {
 
     public void updateUsuario(Usuario user, UsuarioRequestDTO userDTO) {
         user.setNome(userDTO.getNome());
+        user.setLogin(userDTO.getLogin());
         user.setEmail(userDTO.getEmail());
         user.setSenha(user.getSenha());
     }

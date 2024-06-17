@@ -48,10 +48,9 @@ public class JwtUtils {
         return key;
     }
 
-    private boolean validateJwtToken(String authToken) {
+    public boolean validateJwtToken(String authToken) {
 
         try {
-            // Jwts.parser().setSigningKey(getSigningKey()).build().parseClaimsJws(authToken);
             Jwts.parser().verifyWith(getSigningKey()).build().parseSignedClaims(authToken).getPayload();
             return true;
 
@@ -70,5 +69,9 @@ public class JwtUtils {
         }
 
         return false;
+    }
+
+    public String getUsernameToken(String token){
+        return Jwts.parser().verifyWith(getSigningKey()).build().parseSignedClaims(token).getPayload().getSubject();
     }
 }
