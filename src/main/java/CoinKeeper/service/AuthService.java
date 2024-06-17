@@ -40,6 +40,6 @@ public class AuthService {
             System.out.println(" " + e.getMessage());
         }
 
-        return new AuthenticationResponseDTO(null);
+        return null;
     }
 }

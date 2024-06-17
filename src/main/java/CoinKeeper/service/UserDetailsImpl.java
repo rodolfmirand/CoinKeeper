@@ -13,7 +13,7 @@ public class UserDetailsImpl implements UserDetails {
 
     private UUID id;
 
-    private String userName;
+    private String username;
 
     private String email;
 
@@ -42,13 +42,13 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.userName;
+        return this.username;
     }
 
-    public UserDetailsImpl(UUID id, String userName, String email, String password,
+    public UserDetailsImpl(UUID id, String username, String email, String password,
             Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
-        this.userName = userName;
+        this.username = username;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
