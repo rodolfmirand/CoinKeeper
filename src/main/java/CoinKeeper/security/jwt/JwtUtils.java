@@ -1,6 +1,5 @@
 package CoinKeeper.security.jwt;
 
-import java.nio.charset.MalformedInputException;
 import java.security.Key;
 import java.util.Date;
 
@@ -13,7 +12,6 @@ import CoinKeeper.service.UserDetailsImpl;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -38,14 +36,14 @@ public class JwtUtils {
         Key key = getSigningKey();
 
         return Jwts.builder()
-                .setSubject(subject)
-                .setIssuedAt(now)
-                .setExpiration(expiryDate)
-                .signWith(key, SignatureAlgorithm.HS512)
+                .subject(subject)
+                .issuedAt(now)
+                .expiration(expiryDate)
+                .signWith(key)
                 .compact();
     }
 
-    private Key getSigningKey() {
+    private SecretKey getSigningKey() {
         SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
         return key;
     }
@@ -53,7 +51,8 @@ public class JwtUtils {
     private boolean validateJwtToken(String authToken) {
 
         try {
-            Jwts.parser().setSigningKey(getSigningKey()).build().parseClaimsJws(authToken);
+            // Jwts.parser().setSigningKey(getSigningKey()).build().parseClaimsJws(authToken);
+            Jwts.parser().verifyWith(getSigningKey()).build().parseSignedClaims(authToken).getPayload();
             return true;
 
         } catch (MalformedJwtException e) {
