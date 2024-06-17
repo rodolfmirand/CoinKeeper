@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import CoinKeeper.dto.request.AuthenticationDTO;
+import CoinKeeper.dto.request.AuthenticationRequestDTO;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
     
     @PostMapping(value = "/login")
-    public ResponseEntity<?> login(@RequestBody AuthenticationDTO authDTO) {
-        
+    public ResponseEntity<?> login(@RequestBody AuthenticationRequestDTO authDTO) {
+
     }
 }

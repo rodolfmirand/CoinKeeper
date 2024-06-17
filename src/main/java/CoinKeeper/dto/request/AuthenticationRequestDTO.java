@@ -3,7 +3,7 @@ package CoinKeeper.dto.request;
 import lombok.Getter;
 
 @Getter
-public class AuthenticationDTO {
+public class AuthenticationRequestDTO {
     
     private String username;
 
