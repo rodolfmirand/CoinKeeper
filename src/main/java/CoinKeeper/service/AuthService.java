@@ -21,7 +21,6 @@ public class AuthService {
     private JwtUtils jwtUtils;
 
     public AuthenticationResponseDTO login(AuthenticationRequestDTO authDTO) {
-
         try {
             // cria mecanismo de credencial para o spring
             UsernamePasswordAuthenticationToken userAuth = new UsernamePasswordAuthenticationToken(
