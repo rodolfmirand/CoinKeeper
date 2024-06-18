@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import CoinKeeper.dto.request.AuthenticationRequestDTO;
+import CoinKeeper.dto.request.UsuarioRequestDTO;
 import CoinKeeper.service.AuthService;
+import CoinKeeper.service.UsuarioService;
 
 @RestController
 @RequestMapping("/auth")
@@ -17,8 +19,16 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
-    @PostMapping(value = "/login")
+    @Autowired
+    private UsuarioService userService;
+
+    @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthenticationRequestDTO authDTO) {
         return ResponseEntity.ok().body(authService.login(authDTO));
+    }
+
+    @PostMapping("/signup")
+    public ResponseEntity<?> registerNewUser(@RequestBody UsuarioRequestDTO user) {
+        return ResponseEntity.ok().body(userService.registerNewUser(user));
     }
 }
