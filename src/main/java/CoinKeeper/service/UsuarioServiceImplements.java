@@ -49,6 +49,9 @@ public class UsuarioServiceImplements implements UsuarioService {
     public UsuarioResponseDTO registerNewUser(UsuarioRequestDTO usuario) {
         Usuario user = userMapper.toUsuario(usuario);
         user.setSituacao(SituacaoUsuario.PENDENTE);
+
+        // TODO - enviar um email para verificar a conta (opcional)
+
         Conta conta = new Conta(user);
         user.setConta(conta);
         contaRepository.save(conta);
