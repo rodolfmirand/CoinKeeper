@@ -2,9 +2,12 @@ package CoinKeeper.model;
 
 import java.util.UUID;
 
+import CoinKeeper.model.enums.SituacaoUsuario;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -44,6 +47,9 @@ public class Usuario {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Conta conta;
+
+    @Enumerated(EnumType.STRING)
+    private SituacaoUsuario situacao;
 
     @Builder
     public Usuario(String nome, String login, String email, String senha, Conta conta) {
