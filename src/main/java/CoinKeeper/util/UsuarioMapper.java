@@ -23,6 +23,7 @@ public class UsuarioMapper {
                 .login(userDTO.getLogin())
                 .email(userDTO.getEmail())
                 .senha(passwordEncoder.encode(userDTO.getSenha()))
+                .situacao(userDTO.getSituacao())
                 .build();
     }
 
