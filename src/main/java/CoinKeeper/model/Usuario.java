@@ -49,6 +49,7 @@ public class Usuario {
     private Conta conta;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private SituacaoUsuario situacao;
 
     @Builder
