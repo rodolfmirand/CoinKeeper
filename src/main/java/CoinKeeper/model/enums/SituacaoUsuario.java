@@ -1,9 +1,8 @@
 package CoinKeeper.model.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonValue;
 
-@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum SituacaoUsuario {
 
     ATIVO("A", "Ativo"),
@@ -18,6 +17,7 @@ public enum SituacaoUsuario {
         this.descricao = descricao;
     }
 
+    @JsonValue
     public String getCodigo() {
         return codigo;
     }

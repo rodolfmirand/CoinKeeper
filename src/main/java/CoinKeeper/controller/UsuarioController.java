@@ -43,7 +43,7 @@ public class UsuarioController {
         return ResponseEntity.ok().body(service.findAll());
     }
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<UsuarioResponseDTO> register(@RequestBody UsuarioRequestDTO userRequestDTO) {
         return ResponseEntity.ok().body(service.register(userRequestDTO));
     }

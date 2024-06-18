@@ -3,6 +3,7 @@ package CoinKeeper.dto.response;
 import java.util.UUID;
 
 import CoinKeeper.model.Usuario;
+import CoinKeeper.model.enums.SituacaoUsuario;
 import lombok.Getter;
 
 @Getter
@@ -20,6 +21,8 @@ public class UsuarioResponseDTO {
 
     private ContaResponseDTO conta;
 
+    private SituacaoUsuario situacao;
+
     public UsuarioResponseDTO(Usuario usuario) {
         this.id = usuario.getId();
         this.nome = usuario.getNome();
@@ -27,5 +30,6 @@ public class UsuarioResponseDTO {
         this.email = usuario.getEmail();
         this.senha = usuario.getSenha();
         this.conta = new ContaResponseDTO(usuario.getConta());
+        this.situacao = usuario.getSituacao();
     }
 }

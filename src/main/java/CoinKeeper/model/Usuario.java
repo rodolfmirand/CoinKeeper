@@ -52,12 +52,13 @@ public class Usuario {
     private SituacaoUsuario situacao;
 
     @Builder
-    public Usuario(String nome, String login, String email, String senha, Conta conta) {
+    public Usuario(String nome, String login, String email, String senha, Conta conta, SituacaoUsuario situacao) {
         this.nome = nome;
         this.login = login;
         this.email = email;
         this.senha = senha;
         this.conta = conta;
+        this.situacao = situacao;
     }
 
     @Builder
