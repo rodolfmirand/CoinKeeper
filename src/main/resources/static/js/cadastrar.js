@@ -1,9 +1,6 @@
 const xhr = new XMLHttpRequest();
 const url = 'http://localhost:8080/coinkeeper/auth';
 
-
-
-
 function cadastrarUsuario() {
 
     const nome = document.getElementById('nome').value;
