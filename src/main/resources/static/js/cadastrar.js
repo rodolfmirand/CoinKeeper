@@ -41,4 +41,14 @@ function cadastrarUsuario() {
     };
 
     xhr.send(JSON.stringify(data));
+
+    limparInput();
+}
+
+function limparInput() {
+    document.getElementById('nome').value = "";
+    document.getElementById('login').value = "";
+    document.getElementById('email').value = "";
+    document.getElementById('senha').value = "";
+    document.getElementById('senha-confirm').value = "";
 }
