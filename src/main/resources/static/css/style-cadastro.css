@@ -1,10 +1,19 @@
+:root {
+  --preto: #000000;
+  --cinza: #111111;
+  --cinza-amarromzado: #0d0d0d;
+  --amarelo: #e5ad07;
+  --amarelo-escuro: #a87902;
+  --font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
 * {
     margin: 0;
     padding: 0;
 }
 
 body {
-    background-color: rgb(28, 47, 65);
+    background-color: var(--cinza-amarromzado);
     display: grid;
     place-items: center;
     padding-top: 5%;
@@ -12,8 +21,8 @@ body {
 
 .container {
     width: 50vw;
-    height: 74vh;
-    background-color: rgb(46, 70, 92);
+    height: 400px;
+    background-color: var(--cinza);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -23,7 +32,7 @@ body {
 .h1-cadastro {
     padding-top: 20px;
     color: white;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: var(--font-family);
 }
 
 .inpt {
@@ -44,7 +53,7 @@ body {
 
 .bttn {
   appearance: button;
-  background-color: #1899D6;
+  background-color: var(--amarelo-escuro);
   border: solid transparent;
   border-radius: 15px;
   border-width: 0 0 4px;
@@ -75,7 +84,7 @@ body {
 
 .bttn:after {
   background-clip: padding-box;
-  background-color: #1CB0F6;
+  background-color: var(--amarelo);
   border: solid transparent;
   border-radius: 16px;
   border-width: 0 0 4px;

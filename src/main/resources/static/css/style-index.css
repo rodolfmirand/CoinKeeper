@@ -1,25 +1,53 @@
+:root {
+    --preto: #000000;
+    --cinza: #111111;
+    --cinza2: #0f0f0f;
+    --cinza-amarromzado: #0d0d0d;
+    --cinza-escuro: #090909;
+    --amarelo: #e5ad07;
+    --amarelo-escuro: #a87902;
+    --font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+
 * {
     margin: 0;
     padding: 0;
 }
 
 body {
-    background-color: rgb(28, 47, 65);
+    background-color: var(--cinza-amarromzado);
     display: grid;
     place-items: center;
 }
 
-header {
-    background-color: rgb(19, 31, 43);
-    width: 100%;
-    height: 10vh;
+header, .nav {
     display: flex;
+    flex-direction: row;
     align-items: center;
-    
 }
 
-a {
+header {
+    background-color: var(--cinza);
+    width: 100%;
+    height: 10vh;
+    box-shadow: 1px 1px 4px var(--cinza2);
+    justify-content: center;
+    gap: 3em;
+}
+
+.nav {
+    gap: 3em;
+}
+
+.nav a {
     text-decoration: none;
     font-weight: bold;
-    color: rgb(252, 252, 214);
+    color: var(--amarelo);
+    text-transform: uppercase;
+    font-family: var(--font-family);
+    transition: 0.5s;
+}
+
+.nav a:hover {
+    text-shadow: 0 0 10px #a87902;
 }
