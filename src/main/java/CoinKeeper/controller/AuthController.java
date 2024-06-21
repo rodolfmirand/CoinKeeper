@@ -14,7 +14,7 @@ import CoinKeeper.service.AuthService;
 import CoinKeeper.service.UsuarioService;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/coinkeeper/auth")
 public class AuthController {
     
     @Autowired

@@ -23,7 +23,7 @@ import CoinKeeper.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping(path = "/users")
+@RequestMapping(path = "/coinkeeper/users")
 @RequiredArgsConstructor
 public class UsuarioController {
 
