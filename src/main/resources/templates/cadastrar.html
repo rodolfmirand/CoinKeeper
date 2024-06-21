@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,8 @@
     <link rel="stylesheet" href="../static/css/style-cadastro&login.css">
     <link rel="stylesheet" href="../static/css/style-header.css">
     <link rel="stylesheet" href="../static/css/variaveis.css">
-    <script src="../static/js/api.js"></script>
 </head>
+
 <body>
     <header>
         <div class="nav">
@@ -19,14 +20,19 @@
     </header>
     <main>
         <div class="container">
-            <h1 class="h1">Cadastro de Usuário</h1>
-            <input class="inpt" id="inputValue" placeholder="Nome">
-            <input class="inpt" id="inputValue" placeholder="Login">
-            <input class="inpt" id="inputValue" placeholder="E-mail">
-            <input class="inpt" id="inputValue" type="password" placeholder="Senha">
-            <input class="inpt" id="inputValue" type="password" placeholder="Confirmar Senha">
-            <button class="bttn" type="button">Cadastrar</button>
+            <form id="form">
+                <h1 class="h1">Cadastro de Usuário</h1>
+                <input class="inpt" id="nome" placeholder="Nome">
+                <input class="inpt" id="login" placeholder="Login">
+                <input class="inpt" id="email" placeholder="E-mail">
+                <input class="inpt" id="senha" type="password" placeholder="Senha">
+                <input class="inpt" id="senha-confirm" type="password" placeholder="Confirmar Senha">
+                <button class="bttn" onclick="cadastrarUsuario()">Cadastrar</button>
+            </form>
+
         </div>
     </main>
+    <script src="../static/js/cadastrar&login.js"></script>
 </body>
+
 </html>

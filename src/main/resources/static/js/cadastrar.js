@@ -1,1 +1,0 @@
-const url = 'http://localhost8080/coinkeeper/'
