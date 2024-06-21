@@ -11,17 +11,16 @@ body {
 
 .container {
     width: 50vw;
-    height: 400px;
     background-color: var(--cinza);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 5em;
+    padding: 100px;
 }
 
-.h1-cadastro {
-    padding-top: 20px;
+.h1 {
     color: white;
     font-family: var(--font-family);
 }
@@ -31,7 +30,7 @@ body {
     font-size: 14px;
     font-weight: 400;
     letter-spacing: .16px;
-    border-radius: 0;
+    border-radius: 5px;
     outline: 2px solid transparent;
     width: 80%;
     height: 40px;
