@@ -10,6 +10,7 @@ import CoinKeeper.dto.request.UsuarioRequestDTO;
 import CoinKeeper.dto.response.UsuarioResponseDTO;
 import CoinKeeper.model.Conta;
 import CoinKeeper.model.Usuario;
+import CoinKeeper.model.enums.SituacaoUsuario;
 import CoinKeeper.repository.ContaRepository;
 import CoinKeeper.repository.UsuarioRepository;
 import CoinKeeper.util.UsuarioMapper;
@@ -38,6 +39,19 @@ public class UsuarioServiceImplements implements UsuarioService {
     @Override
     public UsuarioResponseDTO register(UsuarioRequestDTO usuario) {
         Usuario user = userMapper.toUsuario(usuario);
+        Conta conta = new Conta(user);
+        user.setConta(conta);
+        contaRepository.save(conta);
+        return userMapper.toUsuarioResponseDTO(userRepository.save(user));
+    }
+
+    @Override
+    public UsuarioResponseDTO registerNewUser(UsuarioRequestDTO usuario) {
+        Usuario user = userMapper.toUsuario(usuario);
+        user.setSituacao(SituacaoUsuario.PENDENTE);
+
+        // TODO - enviar um email para verificar a conta (opcional)
+
         Conta conta = new Conta(user);
         user.setConta(conta);
         contaRepository.save(conta);

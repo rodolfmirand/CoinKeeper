@@ -1,5 +1,6 @@
 package CoinKeeper.repository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,4 +10,6 @@ import CoinKeeper.model.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, UUID> {
+
+    Optional<Usuario> findByLogin(String login);
 }

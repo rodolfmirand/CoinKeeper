@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--cinza-amarromzado);
+    display: grid;
+    place-items: center;
+}
+
+.container {
+    display: grid;
+}
+
+.box {
+    display: flex;
+    height: 300px; 
+    justify-content: center;
+}
+
+.coin {
+    width: 300px;
+    height: 300px;
+}
+
+.h1 {
+    font-family: var(--font-family);
+    color: white;
+}

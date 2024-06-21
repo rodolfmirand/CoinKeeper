@@ -1,9 +1,13 @@
 package CoinKeeper.dto.request;
 
+import java.util.UUID;
+
 import lombok.Getter;
 
 @Getter
-public class CategoriaRequestDTO {
+public class CategoriaUpdateRequestDTO {
+
+    private UUID id;
 
     private String nome;
 

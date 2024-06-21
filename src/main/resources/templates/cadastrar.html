@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoinKeeper - Cadastro</title>
+    <link rel="stylesheet" href="../static/css/style-cadastro&login.css">
+    <link rel="stylesheet" href="../static/css/style-header.css">
+    <link rel="stylesheet" href="../static/css/variaveis.css">
+</head>
+
+<body>
+    <header>
+        <div class="nav">
+            <div class="nav-op"><a href="index.html">início</a></div>
+            <div class="nav-op-active"><a href="cadastrar.html">cadastrar</a></div>
+            <div class="nav-op"><a href="login.html">login</a></div>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <form id="form">
+                <h1 class="h1">Cadastro de Usuário</h1>
+                <input class="inpt" id="nome" placeholder="Nome">
+                <input class="inpt" id="login" placeholder="Login">
+                <input class="inpt" id="email" placeholder="E-mail">
+                <input class="inpt" id="senha" type="password" placeholder="Senha">
+                <input class="inpt" id="senha-confirm" type="password" placeholder="Confirmar Senha">
+                <button class="bttn" onclick="cadastrarUsuario()">Cadastrar</button>
+            </form>
+
+        </div>
+    </main>
+    <script src="../static/js/cadastrar&login.js"></script>
+</body>
+
+</html>

@@ -10,10 +10,13 @@ public class ContaResponseDTO {
 
     private UUID id;
 
+    private String usuario;
+
     private double saldo;
 
     public ContaResponseDTO(Conta conta) {
         this.id = conta.getId();
         this.saldo = conta.getSaldo();
+        this.usuario = conta.getUsuario().getNome();
     }
 }

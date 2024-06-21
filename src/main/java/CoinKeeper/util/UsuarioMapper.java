@@ -3,6 +3,8 @@ package CoinKeeper.util;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import CoinKeeper.dto.request.UsuarioRequestDTO;
@@ -11,12 +13,16 @@ import CoinKeeper.model.Usuario;
 
 @Component
 public class UsuarioMapper {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     
     public Usuario toUsuario(UsuarioRequestDTO userDTO) {
         return Usuario.builder()
                 .nome(userDTO.getNome())
+                .login(userDTO.getLogin())
                 .email(userDTO.getEmail())
-                .senha(userDTO.getSenha())
+                .senha(passwordEncoder.encode(userDTO.getSenha()))
                 .build();
     }
 
@@ -30,6 +36,7 @@ public class UsuarioMapper {
 
     public void updateUsuario(Usuario user, UsuarioRequestDTO userDTO) {
         user.setNome(userDTO.getNome());
+        user.setLogin(userDTO.getLogin());
         user.setEmail(userDTO.getEmail());
         user.setSenha(user.getSenha());
     }

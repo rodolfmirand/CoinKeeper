@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import CoinKeeper.dto.request.CategoriaRequestDTO;
+import CoinKeeper.dto.request.CategoriaUpdateRequestDTO;
 import CoinKeeper.dto.response.CategoriaResponseDTO;
 import CoinKeeper.model.Categoria;
 import CoinKeeper.repository.CategoriaRepository;
@@ -40,15 +41,28 @@ public class CategoriaServiceImplements implements CategoriaService {
     }
 
     @Override
-    public CategoriaResponseDTO update(CategoriaRequestDTO categoria, Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    public CategoriaResponseDTO update(CategoriaUpdateRequestDTO categoriaUpdate, UUID id) {
+        Categoria categoria = findByIdConta(id);
+
+        if (categoriaUpdate.getNome() != "")
+            categoria.setNome(categoriaUpdate.getNome());
+
+        if (categoriaUpdate.getDescricao() != "")
+            categoria.setDescricao(categoriaUpdate.getDescricao());
+
+        categoriaRepository.save(categoria);
+        return new CategoriaResponseDTO(categoria);
     }
 
     @Override
     public String deleteById(UUID id) {
         categoriaRepository.deleteById(id);
         return "Categoria de id (" + id + ") deletada.";
+    }
+
+    @Override
+    public Categoria findByIdConta(UUID id) {
+        return categoriaRepository.findById(id).get();
     }
 
 }
