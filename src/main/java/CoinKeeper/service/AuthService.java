@@ -27,7 +27,7 @@ public class AuthService {
     public AuthenticationResponseDTO login(AuthenticationRequestDTO authDTO) {
         try {
             UsernamePasswordAuthenticationToken userAuth = new UsernamePasswordAuthenticationToken(
-                    authDTO.getUsername(), authDTO.getPassword()); // cria mecanismo de credencial para o spring
+                    authDTO.getLogin(), authDTO.getPassword()); // cria mecanismo de credencial para o spring
             Authentication authentication = authenticationManager.authenticate(userAuth); // prepara mecanismo para autenticação
             UserDetailsImpl userAuthenticate = (UserDetailsImpl) authentication.getPrincipal(); // busca usuario logado
 

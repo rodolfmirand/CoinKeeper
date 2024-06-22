@@ -25,19 +25,26 @@ body {
   font-family: var(--font-family);
 }
 
-.message {
+.message, .message-login {
   display: flex;
   width: 200px;
   justify-content: center;
   padding: 10px 60px;
   position: fixed;
-  bottom: 8%;
   right: 40%;
   border-radius: 3px;
   background-color: var(--amarelo-escuro);
-  color: white;
+  color: var(--preto);
   font-family: var(--font-family); 
   animation: slide 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.message {
+  bottom: 8%;
+}
+
+.message-login{
+  bottom: 31.5%;
 }
 
 @keyframes slide {

@@ -16,7 +16,7 @@ function logarUsuario() {
         senha: senha
     };
 
-    const signupUrl = `${url}/signup`;
+    const signupUrl = `${url}/login`;
 
     xhr.open('POST', signupUrl, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -24,10 +24,12 @@ function logarUsuario() {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                mensagemCadastro(getValueFromPath(xhr.response, 'message'));
+                if(xhr.response === null)
+                    mensagemLogin('Senha incorreta!');
+                // lógica para usar o token do response
             } else {
                 console.error('Erro ao fazer requisição', xhr.status);
-                mensagemCadastro(getValueFromPath(xhr.response, 'message'));
+                mensagemLogin('Usuário não encontrado.');
             }
         }
     };
@@ -49,7 +51,7 @@ function mensagemLogin(response) {
     var divMessage = document.querySelector('.alert');
     var msg = response;
     var message = document.createElement("div");
-    message.classList.add('message');
+    message.classList.add('message-login');
     message.innerText = msg;
     divMessage.appendChild(message);
 
