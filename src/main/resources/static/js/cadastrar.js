@@ -14,6 +14,12 @@ function cadastrarUsuario() {
         return;
     }
 
+    if (login == "" || email == "" || nome == "") {
+        mensagemCadastro('campos-vazios');
+        console.log("Campos vazios.")
+        return;
+    }
+
     // verificar se login já existe
     // verificar se email já existe
 
@@ -32,10 +38,10 @@ function cadastrarUsuario() {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                const response = JSON.parse(xhr.responseText);
-                console.log(response);
+                mensagemCadastro('sucesso');
             } else {
                 console.error('Erro ao fazer requisição', xhr.status);
+                mensagemCadastro();
             }
         }
     };
@@ -52,3 +58,35 @@ function limparInput() {
     document.getElementById('senha').value = "";
     document.getElementById('senha-confirm').value = "";
 }
+
+function mensagemCadastro(response) {
+    var divMessage = "";
+    var msg = "";
+    var message = "";
+
+    switch (response) {
+        case 'sucesso':
+            divMessage = document.querySelector('.alert');
+            msg = "Usuário cadastrado!";
+            message = document.createElement("div");
+            message.classList.add('message');
+            message.style.backgroundColor = 'rgb(7, 83, 7)';
+            break;
+        case 'campos-vazios':
+            divMessage = document.querySelector('.alert');
+            msg = "Campos vazios!";
+            message = document.createElement("div");
+            message.classList.add('message');
+            message.style.backgroundColor = 'rgb(110, 0, 0)';
+            break;
+    }
+
+    message.innerText = msg;
+    divMessage.appendChild(message);
+
+    
+    setTimeout(() => {
+        message.style.display = "none";
+    }, 3000);
+}
+

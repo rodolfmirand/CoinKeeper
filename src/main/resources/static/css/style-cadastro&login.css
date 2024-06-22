@@ -1,44 +1,69 @@
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    background-color: var(--cinza-amarromzado);
-    display: grid;
-    place-items: center;
+  background-color: var(--cinza-amarromzado);
+  display: grid;
+  place-items: center;
 }
 
 .container {
-    width: 50vw;
-    background-color: var(--cinza);
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 5em;
-    padding: 100px;
+  width: 50vw;
+  background-color: var(--cinza);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5em;
+  padding: 100px;
 }
 
 .h1 {
-    color: white;
-    font-family: var(--font-family);
+  color: white;
+  font-family: var(--font-family);
+}
+
+.message {
+  display: flex;
+  width: 150px;
+  justify-content: center;
+  padding: 10px 60px;
+  position: fixed;
+  bottom: 8%;
+  right: 41.5%;
+  border-radius: 3px;
+  color: white;
+  font-family: var(--font-family); 
+  animation: slide 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes slide {
+  0%{
+    transform: translate(1000px);
+    opacity: 0;
+  }
+  100%{
+    transform: translate(0);
+    opacity: 1;
+  }
 }
 
 .inpt {
-    box-sizing: border-box;
-    font-size: 14px;
-    font-weight: 400;
-    letter-spacing: .16px;
-    border-radius: 5px;
-    outline: 2px solid transparent;
-    width: 80%;
-    height: 40px;
-    border: none;
-    background-color: #f4f4f4;
-    padding: 0 16px;
-    color: #161616;
-    margin-top: 20px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: .16px;
+  border-radius: 5px;
+  outline: 2px solid transparent;
+  width: 80%;
+  height: 40px;
+  border: none;
+  background-color: #f4f4f4;
+  padding: 0 16px;
+  color: #161616;
+  margin-top: 20px;
 }
 
 .bttn {
