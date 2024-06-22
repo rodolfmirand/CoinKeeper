@@ -32,4 +32,14 @@ public class UsuarioResponseDTO {
         this.conta = new ContaResponseDTO(usuario.getConta());
         this.situacao = usuario.getSituacao();
     }
+
+    public UsuarioResponseDTO() {
+        this.id = null;
+        this.nome = null;
+        this.login = null;
+        this.email = null;
+        this.senha = null;
+        this.conta = null;
+        this.situacao = null;
+    }
 }

@@ -14,7 +14,7 @@ public interface UsuarioService {
 
     UsuarioResponseDTO register(UsuarioRequestDTO usuario);
 
-    UsuarioResponseDTO registerNewUser(UsuarioRequestDTO usuario);
+    String registerNewUser(UsuarioRequestDTO usuario);
 
     UsuarioResponseDTO update(UsuarioRequestDTO usuario, UUID id);
 

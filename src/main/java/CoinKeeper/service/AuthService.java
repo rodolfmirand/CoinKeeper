@@ -1,6 +1,7 @@
 package CoinKeeper.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,25 +21,24 @@ public class AuthService {
     @Autowired
     private JwtUtils jwtUtils;
 
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+
     public AuthenticationResponseDTO login(AuthenticationRequestDTO authDTO) {
         try {
-            // cria mecanismo de credencial para o spring
             UsernamePasswordAuthenticationToken userAuth = new UsernamePasswordAuthenticationToken(
-                    authDTO.getUsername(), authDTO.getPassword());
-
-            // prepara mecanismo para autenticação
-            Authentication authentication = authenticationManager.authenticate(userAuth);
-
-            // busca usuario logado
-            UserDetailsImpl userAuthenticate = (UserDetailsImpl) authentication.getPrincipal();
+                    authDTO.getLogin(), authDTO.getPassword()); // cria mecanismo de credencial para o spring
+            Authentication authentication = authenticationManager.authenticate(userAuth); // prepara mecanismo para autenticação
+            UserDetailsImpl userAuthenticate = (UserDetailsImpl) authentication.getPrincipal(); // busca usuario logado
 
             String token = jwtUtils.generateTokenFromUserDetailsImp(userAuthenticate);
 
             return new AuthenticationResponseDTO(token);
         } catch (BadCredentialsException e) {
-            System.out.println(" " + e.getMessage());
+            System.out.println(e.getMessage());
         }
 
         return null;
     }
+
 }

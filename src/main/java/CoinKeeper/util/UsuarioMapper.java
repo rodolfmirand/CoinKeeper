@@ -38,6 +38,6 @@ public class UsuarioMapper {
         user.setNome(userDTO.getNome());
         user.setLogin(userDTO.getLogin());
         user.setEmail(userDTO.getEmail());
-        user.setSenha(user.getSenha());
+        user.setSenha(userDTO.getSenha());
     }
 }

@@ -33,7 +33,7 @@ public class Usuario {
     @Setter(AccessLevel.NONE)
     private UUID id;
 
-    @Column(name = "nome", nullable = false, unique = true)
+    @Column(name = "nome", nullable = false)
     private String nome;
 
     @Column(name = "login", nullable = false, unique = true)
@@ -42,7 +42,7 @@ public class Usuario {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "senha", nullable = false, unique = true)
+    @Column(name = "senha", nullable = false)
     private String senha;
 
     @OneToOne(cascade = CascadeType.ALL)

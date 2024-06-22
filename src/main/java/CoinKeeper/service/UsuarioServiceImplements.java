@@ -3,7 +3,9 @@ package CoinKeeper.service;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import CoinKeeper.dto.request.UsuarioRequestDTO;
@@ -21,10 +23,17 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UsuarioServiceImplements implements UsuarioService {
 
+    @Autowired
     private final UsuarioRepository userRepository;
+
+    @Autowired
     private final ContaRepository contaRepository;
 
+    @Autowired
     private final UsuarioMapper userMapper;
+
+    @Autowired
+    private final JdbcTemplate jdbcTemplate;
 
     @Override
     public UsuarioResponseDTO findById(UUID id) {
@@ -46,7 +55,13 @@ public class UsuarioServiceImplements implements UsuarioService {
     }
 
     @Override
-    public UsuarioResponseDTO registerNewUser(UsuarioRequestDTO usuario) {
+    public String registerNewUser(UsuarioRequestDTO usuario) {
+        if(loginExists(usuario.getLogin()))
+            return "Este login já existe.";
+
+        if(emailExists(usuario.getEmail()))
+            return "Este e-mail já existe.";
+
         Usuario user = userMapper.toUsuario(usuario);
         user.setSituacao(SituacaoUsuario.PENDENTE);
 
@@ -55,7 +70,8 @@ public class UsuarioServiceImplements implements UsuarioService {
         Conta conta = new Conta(user);
         user.setConta(conta);
         contaRepository.save(conta);
-        return userMapper.toUsuarioResponseDTO(userRepository.save(user));
+        userMapper.toUsuarioResponseDTO(userRepository.save(user));
+        return "Usuário cadastrado!";
     }
 
     @Override
@@ -78,4 +94,15 @@ public class UsuarioServiceImplements implements UsuarioService {
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado do banco de dados."));
     }
 
+    private boolean emailExists(String email) {
+        String sql = "SELECT COUNT(*) FROM usuarios WHERE email = ?";
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, email);
+        return count != null && count > 0;
+    }
+
+    private boolean loginExists(String login){
+        String sql = "SELECT COUNT(*) FROM usuarios WHERE login = ?";
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, login);
+        return count != null && count > 0;
+    }
 }
