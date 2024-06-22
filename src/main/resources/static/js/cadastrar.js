@@ -11,12 +11,12 @@ function cadastrarUsuario() {
 
     if (senha !== senhaConfirm) {
         console.log('Senhas diferentes.');
+        mensagemCadastro('Senhas diferentes.')
         return;
     }
 
-    if (login == "" || email == "" || nome == "") {
-        mensagemCadastro('campos-vazios');
-        console.log("Campos vazios.")
+    if (login == "" || email == "" || nome == "" || senha == "" || senhaConfirm == "") {
+        mensagemCadastro('Campos vazios.');
         return;
     }
 
@@ -38,10 +38,10 @@ function cadastrarUsuario() {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                mensagemCadastro('sucesso');
+                mensagemCadastro(getValueFromPath(xhr.response, 'message'));
             } else {
                 console.error('Erro ao fazer requisição', xhr.status);
-                mensagemCadastro();
+                mensagemCadastro(getValueFromPath(xhr.response, 'message'));
             }
         }
     };
@@ -60,33 +60,29 @@ function limparInput() {
 }
 
 function mensagemCadastro(response) {
-    var divMessage = "";
-    var msg = "";
-    var message = "";
-
-    switch (response) {
-        case 'sucesso':
-            divMessage = document.querySelector('.alert');
-            msg = "Usuário cadastrado!";
-            message = document.createElement("div");
-            message.classList.add('message');
-            message.style.backgroundColor = 'rgb(7, 83, 7)';
-            break;
-        case 'campos-vazios':
-            divMessage = document.querySelector('.alert');
-            msg = "Campos vazios!";
-            message = document.createElement("div");
-            message.classList.add('message');
-            message.style.backgroundColor = 'rgb(110, 0, 0)';
-            break;
-    }
-
+    var divMessage = document.querySelector('.alert');
+    var msg = response;
+    var message = document.createElement("div");
+    message.classList.add('message');
     message.innerText = msg;
     divMessage.appendChild(message);
 
-    
     setTimeout(() => {
         message.style.display = "none";
     }, 3000);
 }
 
+function getValueFromPath(obj, path) {
+    var json = JSON.parse(obj);
+    const keys = path.split('.');
+    let current = json;
+
+    for (const key of keys) {
+        if (current[key] === undefined) {
+            return undefined;
+        }
+        current = current[key];
+    }
+
+    return current;
+}

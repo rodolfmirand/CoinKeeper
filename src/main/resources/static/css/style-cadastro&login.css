@@ -27,13 +27,14 @@ body {
 
 .message {
   display: flex;
-  width: 150px;
+  width: 200px;
   justify-content: center;
   padding: 10px 60px;
   position: fixed;
   bottom: 8%;
-  right: 41.5%;
+  right: 40%;
   border-radius: 3px;
+  background-color: var(--amarelo-escuro);
   color: white;
   font-family: var(--font-family); 
   animation: slide 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
