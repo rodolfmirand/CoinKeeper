@@ -26,38 +26,19 @@ public class AuthService {
 
     public AuthenticationResponseDTO login(AuthenticationRequestDTO authDTO) {
         try {
-            if(loginExits(authDTO.getUsername()))
-                return new AuthenticationResponseDTO("-1");
-
-            // cria mecanismo de credencial para o spring
             UsernamePasswordAuthenticationToken userAuth = new UsernamePasswordAuthenticationToken(
-                    authDTO.getUsername(), authDTO.getPassword());
-
-            // prepara mecanismo para autenticação
-            Authentication authentication = authenticationManager.authenticate(userAuth);
-
-            // busca usuario logado
-            UserDetailsImpl userAuthenticate = (UserDetailsImpl) authentication.getPrincipal();
+                    authDTO.getUsername(), authDTO.getPassword()); // cria mecanismo de credencial para o spring
+            Authentication authentication = authenticationManager.authenticate(userAuth); // prepara mecanismo para autenticação
+            UserDetailsImpl userAuthenticate = (UserDetailsImpl) authentication.getPrincipal(); // busca usuario logado
 
             String token = jwtUtils.generateTokenFromUserDetailsImp(userAuthenticate);
 
             return new AuthenticationResponseDTO(token);
         } catch (BadCredentialsException e) {
-            System.out.println(" " + e.getMessage());
+            System.out.println(e.getMessage());
         }
 
         return null;
     }
 
-    private boolean loginExits(String login) {
-        String sql = "SELECT COUNT(*) FROM usuarios WHERE login = ?";
-        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, login);
-        return count == null || count == 0;
-    }
-
-    private boolean senhaExists(String login) {
-        String sql = "SELECT COUNT(*) FROM usuarios WHERE login = ?";
-        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, login);
-        return count == null || count == 0;
-    }
 }
