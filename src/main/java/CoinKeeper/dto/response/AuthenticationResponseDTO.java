@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class AuthenticationResponseDTO {
-
+    
     private String token;
 
     // TODO implementar retornar o usuario e liberacoes (authorities)

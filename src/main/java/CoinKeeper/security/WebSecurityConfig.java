@@ -45,7 +45,7 @@ public class WebSecurityConfig {
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/coinkeeper/auth/**").permitAll()
-                        .requestMatchers("/users/**").permitAll()
+                        .requestMatchers("/coinkeeper/users/**").permitAll()
                         .anyRequest().authenticated());
         // remover o .requestMatchers("/users/**")
 

@@ -55,12 +55,12 @@ public class UsuarioServiceImplements implements UsuarioService {
     }
 
     @Override
-    public UsuarioResponseDTO registerNewUser(UsuarioRequestDTO usuario) {
+    public String registerNewUser(UsuarioRequestDTO usuario) {
         if(loginExists(usuario.getLogin()))
-            return new UsuarioResponseDTO("Este login já existe.");
+            return "Este login já existe.";
 
         if(emailExists(usuario.getEmail()))
-            return new UsuarioResponseDTO("Este e-mail já existe.");
+            return "Este e-mail já existe.";
 
         Usuario user = userMapper.toUsuario(usuario);
         user.setSituacao(SituacaoUsuario.PENDENTE);
@@ -70,7 +70,8 @@ public class UsuarioServiceImplements implements UsuarioService {
         Conta conta = new Conta(user);
         user.setConta(conta);
         contaRepository.save(conta);
-        return userMapper.toUsuarioResponseDTO(userRepository.save(user));
+        userMapper.toUsuarioResponseDTO(userRepository.save(user));
+        return "Usuário cadastrado!";
     }
 
     @Override

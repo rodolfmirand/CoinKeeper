@@ -9,8 +9,6 @@ import lombok.Getter;
 @Getter
 public class UsuarioResponseDTO {
 
-    private String message;
-
     private UUID id;
 
     private String nome;
@@ -26,7 +24,6 @@ public class UsuarioResponseDTO {
     private SituacaoUsuario situacao;
 
     public UsuarioResponseDTO(Usuario usuario) {
-        this.message = "Usuário cadastrado!";
         this.id = usuario.getId();
         this.nome = usuario.getNome();
         this.login = usuario.getLogin();
@@ -36,8 +33,7 @@ public class UsuarioResponseDTO {
         this.situacao = usuario.getSituacao();
     }
 
-    public UsuarioResponseDTO(String message) {
-        this.message = message;
+    public UsuarioResponseDTO() {
         this.id = null;
         this.nome = null;
         this.login = null;

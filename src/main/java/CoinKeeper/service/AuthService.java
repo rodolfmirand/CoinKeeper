@@ -1,6 +1,7 @@
 package CoinKeeper.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,8 +21,14 @@ public class AuthService {
     @Autowired
     private JwtUtils jwtUtils;
 
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+
     public AuthenticationResponseDTO login(AuthenticationRequestDTO authDTO) {
         try {
+            if(loginExits(authDTO.getUsername()))
+                return new AuthenticationResponseDTO("-1");
+
             // cria mecanismo de credencial para o spring
             UsernamePasswordAuthenticationToken userAuth = new UsernamePasswordAuthenticationToken(
                     authDTO.getUsername(), authDTO.getPassword());
@@ -40,5 +47,17 @@ public class AuthService {
         }
 
         return null;
+    }
+
+    private boolean loginExits(String login) {
+        String sql = "SELECT COUNT(*) FROM usuarios WHERE login = ?";
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, login);
+        return count == null || count == 0;
+    }
+
+    private boolean senhaExists(String login) {
+        String sql = "SELECT COUNT(*) FROM usuarios WHERE login = ?";
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, login);
+        return count == null || count == 0;
     }
 }

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import CoinKeeper.dto.request.AuthenticationRequestDTO;
 import CoinKeeper.dto.request.UsuarioRequestDTO;
-import CoinKeeper.dto.response.UsuarioResponseDTO;
 import CoinKeeper.service.AuthService;
 import CoinKeeper.service.UsuarioService;
 
@@ -29,7 +28,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<UsuarioResponseDTO> registerNewUser(@RequestBody UsuarioRequestDTO user) {
+    public ResponseEntity<?> registerNewUser(@RequestBody UsuarioRequestDTO user) {
         return ResponseEntity.ok().body(userService.registerNewUser(user));
     }
 }
