@@ -1,4 +1,4 @@
-package CoinKeeper.security;
+package CoinKeeper.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,8 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import CoinKeeper.security.jwt.AuthEntryPointJwt;
-import CoinKeeper.security.jwt.AuthFilterToken;
+import CoinKeeper.configuration.jwt.AuthEntryPointJwt;
+import CoinKeeper.configuration.jwt.AuthFilterToken;
 
 @Configuration
 @EnableMethodSecurity

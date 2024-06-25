@@ -8,9 +8,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import CoinKeeper.configuration.jwt.JwtUtils;
 import CoinKeeper.dto.request.AuthenticationRequestDTO;
 import CoinKeeper.dto.response.AuthenticationResponseDTO;
-import CoinKeeper.security.jwt.JwtUtils;
 
 @Service
 public class AuthService {

@@ -1,4 +1,4 @@
-package CoinKeeper.security.jwt;
+package CoinKeeper.configuration.jwt;
 
 import java.io.IOException;
 import java.util.HashMap;
