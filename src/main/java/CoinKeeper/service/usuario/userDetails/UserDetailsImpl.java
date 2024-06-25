@@ -1,10 +1,12 @@
-package CoinKeeper.service.usuario;
+package CoinKeeper.service.usuario.userDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import CoinKeeper.model.Usuario;
@@ -21,20 +23,27 @@ public class UserDetailsImpl implements UserDetails {
 
     private String password;
 
+    private UserRole role;
+
     public static UserDetailsImpl build(Usuario user) {
         return new UserDetailsImpl(
                 user.getId(),
                 user.getLogin(),
                 user.getEmail(),
                 user.getSenha(),
-                new ArrayList<>());
+                UserRole.USER);
     }
 
-    private Collection<? extends GrantedAuthority> authorities;
+    // private Collection<? extends GrantedAuthority> authorities;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.authorities;
+        if (this.role == UserRole.ADMIN) {
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        } else {
+            return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        }
+
     }
 
     @Override
@@ -48,12 +57,12 @@ public class UserDetailsImpl implements UserDetails {
     }
 
     public UserDetailsImpl(UUID id, String username, String email, String password,
-            Collection<? extends GrantedAuthority> authorities) {
+            UserRole role) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.authorities = authorities;
+        this.role = role;
     }
 
 }

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import CoinKeeper.configuration.jwt.JwtUtils;
 import CoinKeeper.dto.request.AuthenticationRequestDTO;
 import CoinKeeper.dto.response.AuthenticationResponseDTO;
-import CoinKeeper.service.usuario.UserDetailsImpl;
+import CoinKeeper.service.usuario.userDetails.UserDetailsImpl;
 
 @Service
 public class AuthService {
