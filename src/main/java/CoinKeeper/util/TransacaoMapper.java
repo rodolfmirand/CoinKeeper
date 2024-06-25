@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 import CoinKeeper.dto.request.SomaTransacoesRequestDTO;
 import CoinKeeper.dto.response.TransacaoResponseDTO;
 import CoinKeeper.model.Transacao;
-import CoinKeeper.service.CategoriaService;
-import CoinKeeper.service.ContaService;
+import CoinKeeper.service.categoria.CategoriaService;
+import CoinKeeper.service.conta.ContaService;
 
 @Component
 public class TransacaoMapper {

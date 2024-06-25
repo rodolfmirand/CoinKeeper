@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import CoinKeeper.dto.request.CategoriaRequestDTO;
 import CoinKeeper.dto.request.CategoriaUpdateRequestDTO;
 import CoinKeeper.dto.response.CategoriaResponseDTO;
-import CoinKeeper.service.CategoriaService;
+import CoinKeeper.service.categoria.CategoriaService;
 import lombok.RequiredArgsConstructor;
 
 @RestController

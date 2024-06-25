@@ -1,4 +1,4 @@
-package CoinKeeper.service;
+package CoinKeeper.service.autenticacao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import CoinKeeper.configuration.jwt.JwtUtils;
 import CoinKeeper.dto.request.AuthenticationRequestDTO;
 import CoinKeeper.dto.response.AuthenticationResponseDTO;
+import CoinKeeper.service.usuario.UserDetailsImpl;
 
 @Service
 public class AuthService {

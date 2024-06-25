@@ -1,4 +1,4 @@
-package CoinKeeper.service;
+package CoinKeeper.service.categoria;
 
 import java.util.List;
 import java.util.UUID;

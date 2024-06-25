@@ -18,8 +18,8 @@ import CoinKeeper.dto.request.UpdateLimiteRequestDTO;
 import CoinKeeper.dto.request.UsuarioRequestDTO;
 import CoinKeeper.dto.response.ContaResponseDTO;
 import CoinKeeper.dto.response.UsuarioResponseDTO;
-import CoinKeeper.service.ContaService;
-import CoinKeeper.service.UsuarioService;
+import CoinKeeper.service.conta.ContaService;
+import CoinKeeper.service.usuario.UsuarioService;
 import lombok.RequiredArgsConstructor;
 
 @RestController

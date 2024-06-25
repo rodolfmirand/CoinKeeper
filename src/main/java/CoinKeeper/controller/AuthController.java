@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import CoinKeeper.dto.request.AuthenticationRequestDTO;
 import CoinKeeper.dto.request.UsuarioRequestDTO;
-import CoinKeeper.service.AuthService;
-import CoinKeeper.service.UsuarioService;
+import CoinKeeper.service.autenticacao.AuthService;
+import CoinKeeper.service.usuario.UsuarioService;
 
 @RestController
 @RequestMapping("/coinkeeper/auth")

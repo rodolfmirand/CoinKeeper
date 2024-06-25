@@ -14,7 +14,7 @@ import CoinKeeper.dto.request.SomaTransacoesRequestDTO;
 import CoinKeeper.dto.request.TransacaoRequestDTO;
 import CoinKeeper.dto.response.SomaTransacoesResponseDTO;
 import CoinKeeper.dto.response.TransacaoResponseDTO;
-import CoinKeeper.service.TransacaoService;
+import CoinKeeper.service.transacao.TransacaoService;
 import CoinKeeper.util.TransacaoMapper;
 import lombok.RequiredArgsConstructor;
 
