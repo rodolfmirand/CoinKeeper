@@ -38,10 +38,10 @@ function cadastrarUsuario() {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                mensagemCadastro(getValueFromPath(xhr.response, 'message'));
+                mensagemCadastro(xhr.responseText);
             } else {
                 console.error('Erro ao fazer requisição', xhr.status);
-                mensagemCadastro(getValueFromPath(xhr.response, 'message'));
+                mensagemCadastro(xhr.responseText);
             }
         }
     };

@@ -37,7 +37,7 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public AuthFilterToken authFilterToken(){
+    public AuthFilterToken authFilterToken() {
         return new AuthFilterToken();
     }
 
@@ -47,8 +47,9 @@ public class WebSecurityConfig {
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/coinkeeper/auth/**").permitAll()
+                        .requestMatchers("/coinkeeper/users/**").permitAll()
                         .anyRequest().authenticated());
-        // remover o .requestMatchers("/users/**")
+        // alterar o .requestMatchers("/users/**") para apenas role admin
 
         http.addFilterBefore(authFilterToken(), UsernamePasswordAuthenticationFilter.class);
         return http.build();

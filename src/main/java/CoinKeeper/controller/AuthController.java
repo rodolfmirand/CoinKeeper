@@ -29,6 +29,12 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerNewUser(@RequestBody UsuarioRequestDTO user) {
+        if(userService.verifyLogin(user.getLogin()))
+            return ResponseEntity.badRequest().body("Login já cadastrado.");
+        
+        if(userService.verifyEmail(user.getEmail()))
+            return ResponseEntity.badRequest().body("E-mail já cadastrado.");
+
         return ResponseEntity.ok().body(userService.registerNewUser(user));
     }
 }

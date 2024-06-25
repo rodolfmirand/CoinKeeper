@@ -46,6 +46,20 @@ public class UsuarioServiceImplements implements UsuarioService {
     }
 
     @Override
+    public boolean verifyLogin(String login) {
+        String sql = "SELECT COUNT(*) FROM usuarios WHERE login = ?";
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, login);
+        return count != null && count > 0;
+    }
+
+    @Override
+    public boolean verifyEmail(String email) {
+        String sql = "SELECT COUNT(*) FROM usuarios WHERE email = ?";
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, email);
+        return count != null && count > 0;
+    }
+
+    @Override
     public UsuarioResponseDTO register(UsuarioRequestDTO usuario) {
         Usuario user = userMapper.toUsuario(usuario);
         Conta conta = new Conta(user);
@@ -56,16 +70,8 @@ public class UsuarioServiceImplements implements UsuarioService {
 
     @Override
     public String registerNewUser(UsuarioRequestDTO usuario) {
-        if(loginExists(usuario.getLogin()))
-            return "Este login já existe.";
-
-        if(emailExists(usuario.getEmail()))
-            return "Este e-mail já existe.";
-
         Usuario user = userMapper.toUsuario(usuario);
         user.setSituacao(SituacaoUsuario.PENDENTE);
-
-        // TODO - enviar um email para verificar a conta (opcional)
 
         Conta conta = new Conta(user);
         user.setConta(conta);
@@ -92,17 +98,5 @@ public class UsuarioServiceImplements implements UsuarioService {
     private Usuario searchUser(UUID id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado do banco de dados."));
-    }
-
-    private boolean emailExists(String email) {
-        String sql = "SELECT COUNT(*) FROM usuarios WHERE email = ?";
-        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, email);
-        return count != null && count > 0;
-    }
-
-    private boolean loginExists(String login){
-        String sql = "SELECT COUNT(*) FROM usuarios WHERE login = ?";
-        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, login);
-        return count != null && count > 0;
     }
 }

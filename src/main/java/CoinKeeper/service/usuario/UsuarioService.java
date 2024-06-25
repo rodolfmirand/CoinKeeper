@@ -12,6 +12,10 @@ public interface UsuarioService {
 
     List<UsuarioResponseDTO> findAll();
 
+    boolean verifyLogin(String login);
+
+    boolean verifyEmail(String email);
+
     UsuarioResponseDTO register(UsuarioRequestDTO usuario);
 
     String registerNewUser(UsuarioRequestDTO usuario);
