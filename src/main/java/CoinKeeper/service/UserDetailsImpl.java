@@ -11,10 +11,12 @@ import CoinKeeper.model.Usuario;
 
 public class UserDetailsImpl implements UserDetails {
 
+    @SuppressWarnings("unused")
     private UUID id;
 
     private String username;
 
+    @SuppressWarnings("unused")
     private String email;
 
     private String password;
