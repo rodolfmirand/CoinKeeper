@@ -30,7 +30,7 @@ public class AuthController {
                     .header(HttpHeaders.SET_COOKIE, authService.login(authDTO).toString())
                     .body("Login bem sucedido.");
 
-        return ResponseEntity.badRequest().body("Este login não existe.");
+        return ResponseEntity.badRequest().body("Login não encontrado.");
     }
 
     @PostMapping("/signup")

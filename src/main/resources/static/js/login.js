@@ -13,8 +13,10 @@ function logarUsuario() {
 
     const data = {
         login: login,
-        senha: senha
+        password: senha
     };
+
+    console.log(data);
 
     const signupUrl = `${url}/login`;
 
@@ -24,19 +26,19 @@ function logarUsuario() {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                if (xhr.response === null)
-                    mensagemLogin('Senha incorreta!');
+                limparInput();
                 // lógica para usar o token do response
-            } else {
+            } else if(xhr.status === 400) {
+                mensagemLogin(xhr.responseText);
+            }else {
                 console.error('Erro ao fazer requisição', xhr.status);
-                mensagemLogin('Usuário não encontrado.');
+                mensagemLogin('Senha incorreta!');
             }
         }
     };
 
     xhr.send(JSON.stringify(data));
 
-    limparInput();
 }
 
 function mensagemLogin(response) {
@@ -51,9 +53,6 @@ function mensagemLogin(response) {
 }
 
 function limparInput() {
-    document.getElementById('nome').value = "";
     document.getElementById('login').value = "";
-    document.getElementById('email').value = "";
     document.getElementById('senha').value = "";
-    document.getElementById('senha-confirm').value = "";
 }
