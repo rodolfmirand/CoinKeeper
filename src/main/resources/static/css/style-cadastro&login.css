@@ -9,6 +9,12 @@ body {
   place-items: center;
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .container {
   width: 50vw;
   background-color: var(--cinza);
@@ -17,7 +23,7 @@ body {
   flex-direction: column;
   align-items: center;
   margin-top: 5em;
-  padding: 100px;
+  padding: 30px;
 }
 
 .h1 {
@@ -25,37 +31,16 @@ body {
   font-family: var(--font-family);
 }
 
-.message, .message-login {
-  display: flex;
+.alert {
+  display: none;
   width: 200px;
   justify-content: center;
   padding: 10px 60px;
-  position: fixed;
-  right: 40%;
   border-radius: 3px;
   background-color: var(--amarelo-escuro);
   color: var(--preto);
-  font-family: var(--font-family); 
-  animation: slide 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
-
-.message {
-  bottom: 8%;
-}
-
-.message-login{
-  bottom: 31.5%;
-}
-
-@keyframes slide {
-  0%{
-    transform: translate(1000px);
-    opacity: 0;
-  }
-  100%{
-    transform: translate(0);
-    opacity: 1;
-  }
+  font-family: var(--font-family);
+  margin-top: 40px;
 }
 
 .inpt {

@@ -39,6 +39,7 @@ function cadastrarUsuario() {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 mensagemCadastro(xhr.responseText);
+                limparInput();
             } else {
                 console.error('Erro ao fazer requisição', xhr.status);
                 mensagemCadastro(xhr.responseText);
@@ -47,8 +48,16 @@ function cadastrarUsuario() {
     };
 
     xhr.send(JSON.stringify(data));
+}
 
-    limparInput();
+function mensagemCadastro(response) {
+    const divAlert = document.getElementById('alert-message');
+    divAlert.innerText = response;
+    divAlert.style.display = 'flex';
+
+    setTimeout(() => {
+        divAlert.style.display = "none";
+    }, 3000);
 }
 
 function limparInput() {
@@ -57,32 +66,4 @@ function limparInput() {
     document.getElementById('email').value = "";
     document.getElementById('senha').value = "";
     document.getElementById('senha-confirm').value = "";
-}
-
-function mensagemCadastro(response) {
-    var divMessage = document.querySelector('.alert');
-    var msg = response;
-    var message = document.createElement("div");
-    message.classList.add('message');
-    message.innerText = msg;
-    divMessage.appendChild(message);
-
-    setTimeout(() => {
-        message.style.display = "none";
-    }, 3000);
-}
-
-function getValueFromPath(obj, path) {
-    var json = JSON.parse(obj);
-    const keys = path.split('.');
-    let current = json;
-
-    for (const key of keys) {
-        if (current[key] === undefined) {
-            return undefined;
-        }
-        current = current[key];
-    }
-
-    return current;
 }
