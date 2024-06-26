@@ -1,6 +1,7 @@
 package CoinKeeper.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +16,7 @@ import CoinKeeper.service.usuario.UsuarioService;
 @RestController
 @RequestMapping("/coinkeeper/auth")
 public class AuthController {
-    
+
     @Autowired
     private AuthService authService;
 
@@ -24,15 +25,18 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthenticationRequestDTO authDTO) {
-        return ResponseEntity.ok().body(authService.login(authDTO));
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.SET_COOKIE, authService.login(authDTO).toString())
+                .body("Login bem sucedido.");
     }
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerNewUser(@RequestBody UsuarioRequestDTO user) {
-        if(userService.verifyLogin(user.getLogin()))
+        if (userService.verifyLogin(user.getLogin()))
             return ResponseEntity.badRequest().body("Login já cadastrado.");
-        
-        if(userService.verifyEmail(user.getEmail()))
+
+        if (userService.verifyEmail(user.getEmail()))
             return ResponseEntity.badRequest().body("E-mail já cadastrado.");
 
         return ResponseEntity.ok().body(userService.registerNewUser(user));
