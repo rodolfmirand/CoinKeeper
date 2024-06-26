@@ -25,10 +25,12 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthenticationRequestDTO authDTO) {
+        if (userService.verifyLogin(authDTO.getLogin()))
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.SET_COOKIE, authService.login(authDTO).toString())
+                    .body("Login bem sucedido.");
 
-        return ResponseEntity.ok()
-                .header(HttpHeaders.SET_COOKIE, authService.login(authDTO).toString())
-                .body("Login bem sucedido.");
+        return ResponseEntity.badRequest().body("Este login não existe.");
     }
 
     @PostMapping("/signup")
