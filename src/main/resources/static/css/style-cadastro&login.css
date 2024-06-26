@@ -37,8 +37,7 @@ main {
   justify-content: center;
   padding: 10px 60px;
   border-radius: 3px;
-  background-color: var(--amarelo-escuro);
-  color: var(--preto);
+  color: white;
   font-family: var(--font-family);
   margin-top: 40px;
 }
