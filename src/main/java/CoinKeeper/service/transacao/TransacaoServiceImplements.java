@@ -84,7 +84,7 @@ public class TransacaoServiceImplements implements TransacaoService {
                 "WHERE categoria_id = '" + transacao.getCategoria().getId() + "' " +
                 "AND conta_id = '" + transacao.getConta().getId() + "';";
 
-        return new SomaTransacoesResponseDTO(transacao.getCategoria().getId(), transacao.getConta().getId(),
+        return new SomaTransacoesResponseDTO(transacao.getCategoria().getId(), transacao.getConta().getId(), transacao.getConta().getUsuario().getNome(),
                 jdbcTemplate.queryForObject(sql, Float.class));
     }
 
