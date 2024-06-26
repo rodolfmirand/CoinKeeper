@@ -48,6 +48,8 @@ public class WebSecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/coinkeeper/auth/**").permitAll()
                         .requestMatchers("/coinkeeper/users/**").permitAll()
+                        .requestMatchers("/coinkeeper/categorias/**").permitAll()
+                        .requestMatchers("/coinkeeper/transacoes/**").permitAll()
                         .anyRequest().authenticated());
         // alterar o .requestMatchers("/users/**") para apenas role admin
 

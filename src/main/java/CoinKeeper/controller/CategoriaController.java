@@ -21,7 +21,7 @@ import CoinKeeper.service.categoria.CategoriaService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/categorias")
+@RequestMapping("/coinkeeper/categorias")
 @RequiredArgsConstructor
 public class CategoriaController {
 
@@ -33,7 +33,7 @@ public class CategoriaController {
         return ResponseEntity.ok().body(service.findAll());
     }
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<CategoriaResponseDTO> register(@RequestBody CategoriaRequestDTO categoriaRequestDTO) {
         return ResponseEntity.ok().body(service.register(categoriaRequestDTO));
     }

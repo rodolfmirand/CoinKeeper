@@ -19,7 +19,7 @@ import CoinKeeper.util.TransacaoMapper;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/transacoes")
+@RequestMapping("/coinkeeper/transacoes")
 @RequiredArgsConstructor
 public class TransacaoController {
 
