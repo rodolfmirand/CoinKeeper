@@ -24,7 +24,7 @@ function logarUsuario() {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                if(xhr.response === null)
+                if (xhr.response === null)
                     mensagemLogin('Senha incorreta!');
                 // lógica para usar o token do response
             } else {
@@ -39,38 +39,21 @@ function logarUsuario() {
     limparInput();
 }
 
+function mensagemLogin(response) {
+    const divAlert = document.getElementById('alert-message');
+    divAlert.innerText = response;
+    divAlert.style.backgroundColor = '#8a6102';
+    divAlert.style.display = 'flex';
+
+    setTimeout(() => {
+        divAlert.style.display = "none";
+    }, 3000);
+}
+
 function limparInput() {
     document.getElementById('nome').value = "";
     document.getElementById('login').value = "";
     document.getElementById('email').value = "";
     document.getElementById('senha').value = "";
     document.getElementById('senha-confirm').value = "";
-}
-
-function mensagemLogin(response) {
-    var divMessage = document.querySelector('.alert');
-    var msg = response;
-    var message = document.createElement("div");
-    message.classList.add('message-login');
-    message.innerText = msg;
-    divMessage.appendChild(message);
-
-    setTimeout(() => {
-        message.style.display = "none";
-    }, 3000);
-}
-
-function getValueFromPath(obj, path) {
-    var json = JSON.parse(obj);
-    const keys = path.split('.');
-    let current = json;
-
-    for (const key of keys) {
-        if (current[key] === undefined) {
-            return undefined;
-        }
-        current = current[key];
-    }
-
-    return current;
 }
