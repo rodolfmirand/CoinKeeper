@@ -27,8 +27,7 @@ function logarUsuario() {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                limparInput();
-                // lógica para usar o token do response
+                window.location.assign("../../templates/principal.html");
             } else if(xhr.status === 400) {
                 mensagemLogin(xhr.responseText);
             }else {
