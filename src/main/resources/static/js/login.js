@@ -22,6 +22,7 @@ function logarUsuario() {
 
     xhr.open('POST', signupUrl, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.withCredentials = true;
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
