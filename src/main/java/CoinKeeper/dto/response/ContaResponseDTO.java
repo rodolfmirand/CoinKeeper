@@ -8,14 +8,14 @@ import lombok.Getter;
 @Getter
 public class ContaResponseDTO {
 
-    private UUID id;
+    private UUID id_conta;
 
     private String usuario;
 
     private double saldo;
 
     public ContaResponseDTO(Conta conta) {
-        this.id = conta.getId();
+        this.id_conta = conta.getId();
         this.saldo = conta.getSaldo();
         this.usuario = conta.getUsuario().getNome();
     }
