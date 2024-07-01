@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import CoinKeeper.configuration.jwt.AuthEntryPointJwt;
 import CoinKeeper.configuration.jwt.AuthFilterToken;
@@ -52,6 +53,9 @@ public class WebSecurityConfig {
                         .requestMatchers("/coinkeeper/transacoes/**").permitAll()
                         .anyRequest().authenticated());
         // alterar o .requestMatchers("/users/**") para apenas role admin
+
+        http.logout(lOut -> lOut.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
+                .logoutSuccessUrl("/login"));
 
         http.addFilterBefore(authFilterToken(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
