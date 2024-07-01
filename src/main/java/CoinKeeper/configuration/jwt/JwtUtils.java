@@ -8,7 +8,7 @@ import javax.crypto.SecretKey;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import CoinKeeper.service.usuario.userDetails.UserDetailsImpl;
+import CoinKeeper.service.user.userDetails.UserDetailsImpl;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
@@ -20,10 +20,10 @@ import io.jsonwebtoken.security.Keys;
 public class JwtUtils {
 
     @Value("${coinkeeper.jwtSecret}")
-    private String jwtSecret; // password
+    private String jwtSecret; 
 
     @Value("${coinkeeper.jwtExpirationMs}")
-    private int jwtExpirationMs; // tempo que o token vai ficar válido
+    private int jwtExpirationMs; 
 
     public String generateTokenFromUserDetailsImp(UserDetailsImpl userDetails) {
         return buildJwtToken(userDetails.getUsername(), jwtExpirationMs);

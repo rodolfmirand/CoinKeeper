@@ -10,7 +10,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import CoinKeeper.service.usuario.userDetails.UserDetailsServiceImplements;
+import CoinKeeper.service.user.userDetails.UserDetailsServiceImplements;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,29 +25,29 @@ public class AuthFilterToken extends OncePerRequestFilter {
     UserDetailsServiceImplements userDetailsServiceImplements;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+    protected void doFilterInternal(HttpServletRequest httpRequest, HttpServletResponse httpResponse, FilterChain filterChain)
             throws ServletException, IOException {
         try {
-            String jwt = getToken(request);
+            String jwt = getToken(httpRequest);
             if (jwt != null && jwtUtil.validateJwtToken(jwt)) {
 
                 String username = jwtUtil.getUsernameToken(jwt);
                 UserDetails userDetails = userDetailsServiceImplements.loadUserByUsername(username);
                 UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails, null,
                         userDetails.getAuthorities());
-                auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpRequest));
 
                 SecurityContextHolder.getContext().setAuthentication(auth);
             }
         } catch (Exception e) {
             System.out.println("Ocorreu alguma erro ao processar o token. " + e.getMessage());
         } finally {
-            filterChain.doFilter(request, response);
+            filterChain.doFilter(httpRequest, httpResponse);
         }
     }
 
-    private String getToken(HttpServletRequest request) {
-        String headerToken = request.getHeader("Authorization");
+    private String getToken(HttpServletRequest httpRequest) {
+        String headerToken = httpRequest.getHeader("Authorization");
         if (StringUtils.hasText(headerToken) && headerToken.startsWith("Bearer")) {
             return headerToken.replace("Bearer ", "");
         }
