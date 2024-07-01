@@ -26,6 +26,10 @@ body {
     justify-content: center;
 }
 
+.nav-op-right a{
+    cursor: pointer;
+}
+
 .nav-op-left-active {
     background-color: var(--cinza-amarromzado);
     height: 100%;
