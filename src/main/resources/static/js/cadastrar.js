@@ -24,10 +24,10 @@ function cadastrarUsuario() {
     // verificar se email já existe
 
     const data = {
-        nome: nome,
+        name: nome,
         login: login,
         email: email,
-        senha: senha
+        password: senha
     };
 
     const signupUrl = `${url}/signup`;
