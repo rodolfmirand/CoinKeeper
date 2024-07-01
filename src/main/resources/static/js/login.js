@@ -27,7 +27,7 @@ function logarUsuario() {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                window.location.assign("../../templates/principal.html");
+                window.location.href = "principal.html";
             } else if(xhr.status === 400) {
                 mensagemLogin(xhr.responseText);
             }else {
