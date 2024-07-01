@@ -51,11 +51,10 @@ public class WebSecurityConfig {
                         .requestMatchers("/coinkeeper/users/**").permitAll()
                         .requestMatchers("/coinkeeper/categorias/**").permitAll()
                         .requestMatchers("/coinkeeper/transacoes/**").permitAll()
-                        .anyRequest().authenticated());
-        // alterar o .requestMatchers("/users/**") para apenas role admin
-
-        http.logout(lOut -> lOut.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
-                .logoutSuccessUrl("/login"));
+                        .requestMatchers("/").permitAll()
+                        .anyRequest().authenticated())
+                .logout(lOut -> lOut.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
+                        .logoutSuccessUrl("/login"));
 
         http.addFilterBefore(authFilterToken(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
