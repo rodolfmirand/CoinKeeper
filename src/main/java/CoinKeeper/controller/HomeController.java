@@ -13,4 +13,18 @@ public class HomeController {
         mv.setViewName("home/index");
         return mv;
     }
+
+    @GetMapping("/cadastrar")
+    public ModelAndView cadastrar() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("home/cadastrar");
+        return mv;
+    }
+
+    @GetMapping("/login")
+    public ModelAndView login() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("home/login");
+        return mv;
+    }
 }

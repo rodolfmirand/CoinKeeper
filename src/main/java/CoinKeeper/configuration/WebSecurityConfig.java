@@ -51,7 +51,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/coinkeeper/users/**").permitAll()
                         .requestMatchers("/coinkeeper/categorias/**").permitAll()
                         .requestMatchers("/coinkeeper/transacoes/**").permitAll()
-                        .requestMatchers("/").permitAll()
+                        .requestMatchers("/**").permitAll()
                         .anyRequest().authenticated())
                 .logout(lOut -> lOut.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
                         .logoutSuccessUrl("/login"));
