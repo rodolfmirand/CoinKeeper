@@ -29,4 +29,11 @@ public class HomeController {
         mv.setViewName("home/login");
         return mv;
     }
+
+    @GetMapping("/painel")
+    public ModelAndView painel() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("logged/painel");
+        return mv;
+    }
 }
