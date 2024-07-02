@@ -33,23 +33,28 @@ public class HomeController {
     @GetMapping("/painel")
     public ModelAndView painel() {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("logged/painel");
+        mv.setViewName("/logged/painel");
         return mv;
     }
 
     @GetMapping("/perfil")
     public ModelAndView perfil() {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("logged/perfil");
+        mv.setViewName("/logged/perfil");
         return mv;
     }
 
     @GetMapping("/config")
     public ModelAndView config() {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("logged/config");
+        mv.setViewName("/logged/config");
         return mv;
     }
 
-    // fazer logout
+    @GetMapping("/logout")
+    public ModelAndView logout(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("home/index");
+        return mv;
+    }
 }
