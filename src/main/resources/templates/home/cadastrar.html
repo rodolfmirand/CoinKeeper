@@ -5,18 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CoinKeeper - Cadastro</title>
-    <link rel="stylesheet" href="../../static/css/style-cadastro&login.css">
-    <link rel="stylesheet" href="../../static/css/style-header.css">
-    <link rel="stylesheet" href="../../static/css/variaveis.css">
-    <script src="../../static/js/cadastrar.js"></script>
+    <link rel="stylesheet" th:href="@{/css/style-cadastro&login.css}">
+    <link rel="stylesheet" th:href="@{/css/style-header.css}">
+    <link rel="stylesheet" th:href="@{/css/variaveis.css}">
+    <script th:src="@{/js/cadastrar.js}"></script>
 </head>
 
 <body>
     <header>
         <div class="nav">
             <div class="nav-op-active"><a href="">cadastrar</a></div>
-            <div class="nav-op"><a href="@{/coinkeeper/home}">início</a></div>
-            <div class="nav-op"><a href="@{/coinkeeper/login}">login</a></div>
+            <div class="nav-op"><a th:href="@{/coinkeeper/home}">início</a></div>
+            <div class="nav-op"><a th:href="@{/coinkeeper/login}">login</a></div>
         </div>
     </header>
     <main>

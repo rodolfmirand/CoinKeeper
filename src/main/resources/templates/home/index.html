@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CoinKeeper - Início</title>
-    <link rel="stylesheet" href="../../static/css/style-index.css">
-    <link rel="stylesheet" href="../../static/css/style-header.css">
-    <link rel="stylesheet" href="../../static/css/variaveis.css">
+    <link rel="stylesheet" th:href="@{/css/style-index.css}">
+    <link rel="stylesheet" th:href="@{/css/style-header.css}">
+    <link rel="stylesheet" th:href="@{/css/variaveis.css}">
 </head>
 
 <body>
@@ -15,12 +15,12 @@
         <div class="nav">
             <div class="nav-op"><a th:href="@{/coinkeeper/cadastrar}">cadastrar</a></div>
             <div class="nav-op-active"><a href="">início</a></div>
-            <div class="nav-op"><a href="@{/coinkeeper/login}">login</a></div>
+            <div class="nav-op"><a th:href="@{/coinkeeper/login}">login</a></div>
         </div>
     </header>
     <main>
         <div class="container">
-            <div class="box"><img class="coin" src="../../static/images/coin-logo.png" alt=""></div>
+            <div class="box"><img class="coin" th:src="@{/images/coin-logo.png}" alt=""></div>
         </div>
         <div class="box">
             <h1 class="h1">CoinKeeper é um gerenciador de gastos pessoais desenvolvido em Java e Spring Boot.</h1>
