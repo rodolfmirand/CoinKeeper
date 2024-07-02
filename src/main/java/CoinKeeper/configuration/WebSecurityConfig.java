@@ -54,7 +54,8 @@ public class WebSecurityConfig {
                         .requestMatchers("/**").permitAll()
                         .anyRequest().authenticated())
                 .logout(lOut -> lOut.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
-                        .logoutSuccessUrl("/login"));
+                        .deleteCookies("dummyCookies")
+                        .logoutSuccessUrl("/coinkeeper/login"));
 
         http.addFilterBefore(authFilterToken(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
