@@ -36,4 +36,20 @@ public class HomeController {
         mv.setViewName("logged/painel");
         return mv;
     }
+
+    @GetMapping("/perfil")
+    public ModelAndView perfil() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("logged/perfil");
+        return mv;
+    }
+
+    @GetMapping("/config")
+    public ModelAndView config() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("logged/config");
+        return mv;
+    }
+
+    // fazer logout
 }
