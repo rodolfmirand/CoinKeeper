@@ -1,8 +1,6 @@
-const xhr = new XMLHttpRequest();
-const url = 'http://localhost:8080/coinkeeper/auth';
-
 function logarUsuario() {
-
+    const xhr = new XMLHttpRequest();
+    const url = 'http://localhost:8080/coinkeeper/auth';
     const login = document.getElementById('login').value;
     const senha = document.getElementById('senha').value;
 
@@ -27,18 +25,48 @@ function logarUsuario() {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                window.location.href = '/coinkeeper/painel';
-            } else if(xhr.status === 400) {
+                const token = getTokenFromCookie('token');
+                redirect(token);
+            } else if (xhr.status === 400) {
                 mensagemLogin(xhr.responseText);
-            }else {
-                console.error('Erro ao fazer requisição', xhr.status);
-                mensagemLogin('Senha incorreta!');
+            } else {
+                mensagemLogin(xhr.responseText);
             }
         }
     };
 
     xhr.send(JSON.stringify(data));
 
+}
+
+function getTokenFromCookie(name) {
+    const cookies = document.cookie;
+    const cookieArray = cookies.split(';');
+    for (let i = 0; i < cookieArray.length; i++) {
+        let cookie = cookieArray[i].trim();
+        if (cookie.startsWith(name + '=')) {
+            return decodeURIComponent(cookie.substring(name.length + 1));
+        }
+    }
+    return null;
+}
+
+function redirect(token) {
+    const xhr = new XMLHttpRequest();
+    const url = 'http://localhost:8080/coinkeeper/painel';
+
+    xhr.open('GET', url, true);
+    xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            window.location.href = url;
+        } else {
+            console.error('Error:', xhr.statusText);
+        }
+    };
+
+    xhr.send();
 }
 
 function mensagemLogin(response) {

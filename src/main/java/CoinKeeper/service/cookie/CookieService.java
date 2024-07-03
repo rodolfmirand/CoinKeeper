@@ -11,8 +11,6 @@ public class CookieService {
 
     public static void setCookie(String token, HttpServletResponse response) {
         Cookie cookie = new Cookie("token", token);
-        cookie.setHttpOnly(true);
-        cookie.setSecure(true);
         cookie.setPath("/");
         cookie.setMaxAge(300);
 
