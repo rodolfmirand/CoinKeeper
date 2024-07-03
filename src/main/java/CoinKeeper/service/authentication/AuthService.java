@@ -1,7 +1,6 @@
 package CoinKeeper.service.authentication;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseCookie;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -25,7 +24,7 @@ public class AuthService {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public ResponseCookie login(AuthenticationRequest authDTO) {
+    public String login(AuthenticationRequest authDTO) {
         try {
             UsernamePasswordAuthenticationToken userAuth = new UsernamePasswordAuthenticationToken(
                     authDTO.getLogin(), authDTO.getPassword()); // cria mecanismo de credencial para o spring
@@ -33,17 +32,7 @@ public class AuthService {
                                                                                           // autenticação
             UserDetailsImpl userAuthenticate = (UserDetailsImpl) authentication.getPrincipal(); // busca usuario logado
 
-            String token = jwtUtils.generateTokenFromUserDetailsImp(userAuthenticate);
-
-            ResponseCookie cookie = ResponseCookie.from("token", token)
-                    .httpOnly(true)
-                    .secure(true)
-                    .path("/")
-                    .maxAge(3000)
-                    .sameSite("Strict")
-                    .build();
-
-            return cookie;
+            return jwtUtils.generateTokenFromUserDetailsImp(userAuthenticate);
 
         } catch (BadCredentialsException e) {
             System.out.println(e.getMessage());

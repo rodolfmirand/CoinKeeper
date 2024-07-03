@@ -1,7 +1,6 @@
 package CoinKeeper.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,7 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import CoinKeeper.dto.request.AuthenticationRequest;
 import CoinKeeper.dto.request.UserRequest;
 import CoinKeeper.service.authentication.AuthService;
+import CoinKeeper.service.cookie.CookieService;
 import CoinKeeper.service.user.UserService;
+import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/coinkeeper/auth")
@@ -24,12 +25,17 @@ public class AuthenticationController {
     private UserService userService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody AuthenticationRequest authRequest) {
-        if (userService.verifyLogin(authRequest.getLogin()))
-            return ResponseEntity.ok()
-                    .header(HttpHeaders.SET_COOKIE, authService.login(authRequest).toString())
-                    .body("Login bem sucedido.");
-
+    public ResponseEntity<?> login(@RequestBody AuthenticationRequest authRequest, HttpServletResponse response) {
+        if (userService.verifyLogin(authRequest.getLogin())) {
+            String token = authService.login(authRequest);
+            if (token != null) {
+                CookieService.setCookie(token, response);
+                return ResponseEntity.ok()
+                        .body("Login bem sucedido.");
+            } else {
+                return ResponseEntity.badRequest().body("Senha incorreta.");
+            }
+        }
         return ResponseEntity.badRequest().body("Login não encontrado.");
     }
 
