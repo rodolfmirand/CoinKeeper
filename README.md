@@ -6,6 +6,7 @@ Este é um projeto pessoal desenvolvido em Java, SpringBoot, HTML, CSS e Javascp
 
 ## Funcionalidades
 
+- CRUD
 - Registro de transações de entrada e saída de dinheiro.
 - Categorização de despesas.
 - Visualização de histórico de transações.
