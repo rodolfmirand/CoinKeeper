@@ -1,10 +1,8 @@
 # CoinKeeper 💰
 
-CoinKeeper é um gerenciador de gastos pessoais desenvolvido em Java Spring Boot.
+CoinKeeper é um gerenciador para auxiliar no controle e gestão de gastos financeiros.
 
-## Descrição
-
-Este é um projeto pessoal criado para auxiliar no controle e gestão de gastos financeiros. 
+Este é um projeto pessoal desenvolvido em Java, SpringBoot, HTML, CSS e Javascpript.
 
 ## Funcionalidades
 
