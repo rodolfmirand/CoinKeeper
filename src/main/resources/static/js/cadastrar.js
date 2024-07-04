@@ -24,10 +24,10 @@ function cadastrarUsuario() {
     // verificar se email já existe
 
     const data = {
-        nome: nome,
+        name: nome,
         login: login,
         email: email,
-        senha: senha
+        password: senha
     };
 
     const signupUrl = `${url}/signup`;
@@ -38,17 +38,33 @@ function cadastrarUsuario() {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                mensagemCadastro(getValueFromPath(xhr.response, 'message'));
+                mensagemCadastro(xhr.responseText, "sucesso");
+                limparInput();
             } else {
                 console.error('Erro ao fazer requisição', xhr.status);
-                mensagemCadastro(getValueFromPath(xhr.response, 'message'));
+                mensagemCadastro(xhr.responseText, null);
             }
         }
     };
 
     xhr.send(JSON.stringify(data));
+}
 
-    limparInput();
+function mensagemCadastro(response, status) {
+    const divAlert = document.getElementById('alert-message');
+    divAlert.innerText = response;
+
+    if (status == "sucesso") {
+        divAlert.style.backgroundColor = 'rgb(7, 83, 7)';
+    } else {
+        divAlert.style.backgroundColor = '#8a6102';
+    }
+
+    divAlert.style.display = 'flex';
+
+    setTimeout(() => {
+        divAlert.style.display = "none";
+    }, 3000);
 }
 
 function limparInput() {
@@ -57,32 +73,4 @@ function limparInput() {
     document.getElementById('email').value = "";
     document.getElementById('senha').value = "";
     document.getElementById('senha-confirm').value = "";
-}
-
-function mensagemCadastro(response) {
-    var divMessage = document.querySelector('.alert');
-    var msg = response;
-    var message = document.createElement("div");
-    message.classList.add('message');
-    message.innerText = msg;
-    divMessage.appendChild(message);
-
-    setTimeout(() => {
-        message.style.display = "none";
-    }, 3000);
-}
-
-function getValueFromPath(obj, path) {
-    var json = JSON.parse(obj);
-    const keys = path.split('.');
-    let current = json;
-
-    for (const key of keys) {
-        if (current[key] === undefined) {
-            return undefined;
-        }
-        current = current[key];
-    }
-
-    return current;
 }

@@ -1,8 +1,6 @@
-const xhr = new XMLHttpRequest();
-const url = 'http://localhost:8080/coinkeeper/auth';
-
 function logarUsuario() {
-
+    const xhr = new XMLHttpRequest();
+    const url = 'http://localhost:8080/coinkeeper/auth';
     const login = document.getElementById('login').value;
     const senha = document.getElementById('senha').value;
 
@@ -13,64 +11,76 @@ function logarUsuario() {
 
     const data = {
         login: login,
-        senha: senha
+        password: senha
     };
+
+    console.log(data);
 
     const signupUrl = `${url}/login`;
 
     xhr.open('POST', signupUrl, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.withCredentials = true;
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                if(xhr.response === null)
-                    mensagemLogin('Senha incorreta!');
-                // lógica para usar o token do response
+                const token = getTokenFromCookie('token');
+                redirect(token);
+            } else if (xhr.status === 400) {
+                mensagemLogin(xhr.responseText);
             } else {
-                console.error('Erro ao fazer requisição', xhr.status);
-                mensagemLogin('Usuário não encontrado.');
+                mensagemLogin(xhr.responseText);
             }
         }
     };
 
     xhr.send(JSON.stringify(data));
 
-    limparInput();
 }
 
-function limparInput() {
-    document.getElementById('nome').value = "";
-    document.getElementById('login').value = "";
-    document.getElementById('email').value = "";
-    document.getElementById('senha').value = "";
-    document.getElementById('senha-confirm').value = "";
+function getTokenFromCookie(name) {
+    const cookies = document.cookie;
+    const cookieArray = cookies.split(';');
+    for (let i = 0; i < cookieArray.length; i++) {
+        let cookie = cookieArray[i].trim();
+        if (cookie.startsWith(name + '=')) {
+            return decodeURIComponent(cookie.substring(name.length + 1));
+        }
+    }
+    return null;
+}
+
+function redirect(token) {
+    const xhr = new XMLHttpRequest();
+    const url = 'http://localhost:8080/coinkeeper/painel';
+
+    xhr.open('GET', url, true);
+    xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            window.location.href = url;
+        } else {
+            console.error('Error:', xhr.statusText);
+        }
+    };
+
+    xhr.send();
 }
 
 function mensagemLogin(response) {
-    var divMessage = document.querySelector('.alert');
-    var msg = response;
-    var message = document.createElement("div");
-    message.classList.add('message-login');
-    message.innerText = msg;
-    divMessage.appendChild(message);
+    const divAlert = document.getElementById('alert-message');
+    divAlert.innerText = response;
+    divAlert.style.backgroundColor = '#8a6102';
+    divAlert.style.display = 'flex';
 
     setTimeout(() => {
-        message.style.display = "none";
+        divAlert.style.display = "none";
     }, 3000);
 }
 
-function getValueFromPath(obj, path) {
-    var json = JSON.parse(obj);
-    const keys = path.split('.');
-    let current = json;
-
-    for (const key of keys) {
-        if (current[key] === undefined) {
-            return undefined;
-        }
-        current = current[key];
-    }
-
-    return current;
+function limparInput() {
+    document.getElementById('login').value = "";
+    document.getElementById('senha').value = "";
 }
