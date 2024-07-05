@@ -13,7 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import CoinKeeper.configuration.jwt.AuthEntryPointJwt;
 import CoinKeeper.configuration.jwt.AuthFilterToken;
@@ -51,12 +50,10 @@ public class WebSecurityConfig {
                         .requestMatchers("/coinkeeper/auth/**").permitAll()
                         .requestMatchers("/coinkeeper/home", "/coinkeeper/login", "/coinkeeper/cadastrar").permitAll()
                         .requestMatchers("/static/**", "/css/**", "/js/**", "/images/**").permitAll()
-                        .anyRequest().authenticated())
-                .logout(lOut -> lOut.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
-                        .deleteCookies("dummyCookies")
-                        .logoutSuccessUrl("/coinkeeper/login"));
+                        .anyRequest().authenticated());
 
         http.addFilterBefore(authFilterToken(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
+
     }
 }

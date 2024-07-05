@@ -1,20 +1,14 @@
 package CoinKeeper.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import CoinKeeper.configuration.jwt.JwtUtils;
-
 @RequestMapping("/coinkeeper")
 @Controller
 public class HomeController {
-
-    @Autowired
-    private JwtUtils jwt;
 
     @GetMapping("/home")
     public ModelAndView index() {
@@ -40,10 +34,7 @@ public class HomeController {
     @GetMapping("/painel")
     public ModelAndView painel(@CookieValue(name = "token") String token) {
         ModelAndView mv = new ModelAndView();
-        
-        if (jwt.validateJwtToken(token))
-            mv.setViewName("/logged/painel");
-
+        mv.setViewName("/logged/painel");
         return mv;
     }
 
