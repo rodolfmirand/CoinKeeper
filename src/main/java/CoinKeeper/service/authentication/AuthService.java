@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import CoinKeeper.configuration.jwt.JwtUtils;
 import CoinKeeper.dto.request.AuthenticationRequest;
-import CoinKeeper.service.user.userDetails.UserDetailsImpl;
+import CoinKeeper.service.authentication.userDetails.UserDetailsImpl;
 
 @Service
 public class AuthService {

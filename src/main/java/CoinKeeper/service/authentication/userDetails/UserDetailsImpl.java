@@ -1,4 +1,4 @@
-package CoinKeeper.service.user.userDetails;
+package CoinKeeper.service.authentication.userDetails;
 
 import java.util.Collection;
 import java.util.List;
