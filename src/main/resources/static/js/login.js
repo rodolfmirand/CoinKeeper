@@ -52,20 +52,18 @@ function getTokenFromCookie(name) {
 }
 
 function redirect(token) {
-    const xhr = new XMLHttpRequest();
     const url = 'http://localhost:8080/coinkeeper/painel';
-
+    var xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
-    xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            window.location.href = url;
-        } else {
-            console.error('Error:', xhr.statusText);
+    xhr.setRequestHeader('Authorization', 'Bearer ' + token); 
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+            } else {
+                console.error('Erro na requisição:', xhr.status);
+            }
         }
     };
-
     xhr.send();
 }
 
