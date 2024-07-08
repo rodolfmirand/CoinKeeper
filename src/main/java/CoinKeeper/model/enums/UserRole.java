@@ -1,4 +1,4 @@
-package CoinKeeper.service.user.userDetails;
+package CoinKeeper.model.enums;
 
 public enum UserRole {
     

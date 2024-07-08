@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import CoinKeeper.model.User;
+import CoinKeeper.model.enums.UserRole;
 
 public class UserDetailsImpl implements UserDetails {
 
