@@ -12,7 +12,6 @@ import CoinKeeper.dto.request.UserRequest;
 import CoinKeeper.dto.response.UserResponse;
 import CoinKeeper.model.Account;
 import CoinKeeper.model.User;
-import CoinKeeper.model.enums.UserStatus;
 import CoinKeeper.repository.AccountRepository;
 import CoinKeeper.repository.UserRepository;
 import CoinKeeper.util.UserMapper;
@@ -71,7 +70,6 @@ public class UserServiceImplements implements UserService {
     @Override
     public String registerNewUser(UserRequest userRequest) {
         User user = userMapper.toUser(userRequest);
-        user.setStatus(UserStatus.PENDENTE);
 
         Account account = new Account(user);
         user.setAccount(account);

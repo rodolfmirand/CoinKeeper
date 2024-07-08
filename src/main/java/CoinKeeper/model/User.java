@@ -63,7 +63,8 @@ public class User {
         this.email = email;
         this.password = password;
         this.account = account;
-        this.status = status;
+        this.status = UserStatus.PENDENTE;
+        this.role = UserRole.USER;
     }
 
     @Builder
