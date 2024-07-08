@@ -7,7 +7,7 @@ public enum UserStatus {
 
     ATIVO("A", "Ativo"),
     INATIVO("I", "Inativo"),
-    PENDENTE("p", "Pendente");
+    PENDENTE("P", "Pendente");
 
     private String code;
     private String description;
