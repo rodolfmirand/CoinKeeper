@@ -25,8 +25,7 @@ function logarUsuario() {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                const token = getTokenFromCookie('token');
-                redirect(token);
+                redirect(getTokenFromCookie('token'));
             } else if (xhr.status === 400) {
                 mensagemLogin(xhr.responseText);
             } else {
@@ -39,6 +38,23 @@ function logarUsuario() {
 
 }
 
+function redirect(token) {
+    const url = 'http://localhost:8080/coinkeeper/painel';
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                window.location.href = url;
+            } else {
+                console.error('Erro na requisição:', xhr.status);
+            }
+        }
+    };
+    xhr.send();
+}
+
 function getTokenFromCookie(name) {
     const cookies = document.cookie;
     const cookieArray = cookies.split(';');
@@ -49,22 +65,6 @@ function getTokenFromCookie(name) {
         }
     }
     return null;
-}
-
-function redirect(token) {
-    const url = 'http://localhost:8080/coinkeeper/painel';
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.setRequestHeader('Authorization', 'Bearer ' + token); 
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-            } else {
-                console.error('Erro na requisição:', xhr.status);
-            }
-        }
-    };
-    xhr.send();
 }
 
 function mensagemLogin(response) {

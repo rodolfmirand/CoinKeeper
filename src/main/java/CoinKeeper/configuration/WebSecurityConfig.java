@@ -48,10 +48,10 @@ public class WebSecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/coinkeeper/auth/**").permitAll()
-                        .requestMatchers("/coinkeeper/home", "/coinkeeper/login", "/coinkeeper/cadastrar").permitAll()
+                        .requestMatchers("/coinkeeper/**").permitAll()
                         .requestMatchers("/static/**", "/css/**", "/js/**", "/images/**").permitAll()
                         .anyRequest().authenticated());
-
+                        
         http.addFilterBefore(authFilterToken(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
 
