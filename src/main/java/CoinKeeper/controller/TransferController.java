@@ -29,16 +29,20 @@ public class TransferController {
     @Autowired
     private TransferMapper mapper;
 
+    //admin
     @GetMapping
     public ResponseEntity<List<TransferResponse>> findAll() {
         return ResponseEntity.ok().body(service.findAll());
     }
 
+    //admin -> todos
+    //user -> apenas ele próprio
     @GetMapping("/total")
     public ResponseEntity<TransferSumResponse> getTotalExpense(@RequestBody TransferSumRequest transferSumRequest) {
         return ResponseEntity.ok().body(service.getTotalExpense(mapper.transferSumRequestToTransfer(transferSumRequest)));
     }
 
+    //admin
     @PostMapping
     public ResponseEntity<TransferResponse> register(@RequestBody TransferRequest transferRequest){
         return ResponseEntity.ok().body(service.register(transferRequest));

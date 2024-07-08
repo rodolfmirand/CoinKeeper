@@ -28,21 +28,25 @@ public class CategoryController {
     @Autowired
     private final CategoryService service;
 
+    //admin
     @GetMapping
     public ResponseEntity<List<CategoryResponse>> findAll() {
         return ResponseEntity.ok().body(service.findAll());
     }
 
+    //admin -> todos
     @PostMapping("/register")
     public ResponseEntity<CategoryResponse> register(@RequestBody CategoryRequest categoryRequest) {
         return ResponseEntity.ok().body(service.register(categoryRequest));
     }
-
+    
+    //admin
     @PutMapping("/update")
     public ResponseEntity<CategoryResponse> update(@RequestBody CategoryUpdateRequest categoryUpdateRequest) {
         return ResponseEntity.ok().body(service.update(categoryUpdateRequest, categoryUpdateRequest.getId()));
     }
 
+    //admin
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable(value = "id") UUID id) {
         return ResponseEntity.ok().body(service.deleteById(id));

@@ -24,6 +24,7 @@ public class AuthenticationController {
     @Autowired
     private UserService userService;
 
+    //aberto
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthenticationRequest authRequest, HttpServletResponse response) {
         if (userService.verifyLogin(authRequest.getLogin())) {
@@ -39,8 +40,9 @@ public class AuthenticationController {
         return ResponseEntity.badRequest().body("Login não encontrado.");
     }
 
+    //aberto
     @PostMapping("/signup")
-    public ResponseEntity<?> registerNewUser(@RequestBody UserRequest userRequest) {
+    public ResponseEntity<?> register(@RequestBody UserRequest userRequest) {
         if (userService.verifyLogin(userRequest.getLogin()))
             return ResponseEntity.badRequest().body("Login já cadastrado.");
 

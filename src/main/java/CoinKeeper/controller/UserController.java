@@ -33,32 +33,43 @@ public class UserController {
     @Autowired
     private final AccountService accountService;
 
+    // admin
     @GetMapping("/{id}")
     public ResponseEntity<UserResponse> findById(@PathVariable(name = "id") UUID id) {
         return ResponseEntity.ok().body(service.findById(id));
     }
 
+    // admin
     @GetMapping()
     public ResponseEntity<List<UserResponse>> findAll() {
         return ResponseEntity.ok().body(service.findAll());
     }
 
+    //remover?
     @PostMapping("/register")
     public ResponseEntity<UserResponse> register(@RequestBody UserRequest userRequest) {
         return ResponseEntity.ok().body(service.register(userRequest));
     }
 
+    //admin -> todos
+    //user -> apenas ele próprio
     @PostMapping("/conta/limite")
-    public ResponseEntity<AccountResponse> updateLimiteConta(@RequestBody BalanceLimitUpdateRequest balanceLimitUpdateRequest){
-        return ResponseEntity.ok().body(accountService.updateBalanceLimit(balanceLimitUpdateRequest.getId_account(), balanceLimitUpdateRequest.getAmount()));
+    public ResponseEntity<AccountResponse> updateBalanceLimit(
+            @RequestBody BalanceLimitUpdateRequest balanceLimitUpdateRequest) {
+        return ResponseEntity.ok().body(accountService.updateBalanceLimit(balanceLimitUpdateRequest.getId_account(),
+                balanceLimitUpdateRequest.getAmount()));
     }
 
+    // admin -> todos
+    // user -> apenas ele próprio
     @PutMapping("/{id}")
     public ResponseEntity<UserResponse> update(@RequestBody UserRequest userRequest,
             @PathVariable(name = "id") UUID id) {
         return ResponseEntity.ok().body(service.update(userRequest, id));
     }
 
+    // admin -> todos
+    // user -> apenas ele próprio
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable(value = "id") UUID id) {
         return ResponseEntity.ok().body(service.deleteById(id));
