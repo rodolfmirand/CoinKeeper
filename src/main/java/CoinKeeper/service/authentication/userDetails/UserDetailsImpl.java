@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import CoinKeeper.model.user.User;
 import CoinKeeper.model.user.enums.UserRole;
+import CoinKeeper.model.user.enums.UserStatus;
 
 public class UserDetailsImpl implements UserDetails {
 
@@ -23,7 +24,11 @@ public class UserDetailsImpl implements UserDetails {
 
     private String password;
 
+    @SuppressWarnings("unused")
+    private UserStatus status;
+
     private UserRole role;
+
 
     public static UserDetailsImpl build(User user) {
         return new UserDetailsImpl(
@@ -31,6 +36,7 @@ public class UserDetailsImpl implements UserDetails {
                 user.getLogin(),
                 user.getEmail(),
                 user.getPassword(),
+                user.getStatus(),
                 UserRole.USER);
     }
 
@@ -56,12 +62,13 @@ public class UserDetailsImpl implements UserDetails {
         return this.username;
     }
 
-    public UserDetailsImpl(UUID id, String username, String email, String password,
+    public UserDetailsImpl(UUID id, String username, String email, String password, UserStatus status,
             UserRole role) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.status = status;
         this.role = role;
     }
 
