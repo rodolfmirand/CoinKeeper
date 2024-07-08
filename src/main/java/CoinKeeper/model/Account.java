@@ -2,6 +2,7 @@ package CoinKeeper.model;
 
 import java.util.UUID;
 
+import CoinKeeper.model.user.User;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import CoinKeeper.dto.request.UserRequest;
 import CoinKeeper.dto.response.UserResponse;
-import CoinKeeper.model.User;
+import CoinKeeper.model.user.User;
 
 @Component
 public class UserMapper {

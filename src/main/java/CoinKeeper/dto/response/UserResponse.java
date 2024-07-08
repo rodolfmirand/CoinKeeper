@@ -2,8 +2,8 @@ package CoinKeeper.dto.response;
 
 import java.util.UUID;
 
-import CoinKeeper.model.User;
-import CoinKeeper.model.enums.UserStatus;
+import CoinKeeper.model.user.User;
+import CoinKeeper.model.user.enums.UserStatus;
 import lombok.Getter;
 
 @Getter

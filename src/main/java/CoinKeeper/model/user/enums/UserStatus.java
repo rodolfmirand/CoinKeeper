@@ -1,4 +1,4 @@
-package CoinKeeper.model.enums;
+package CoinKeeper.model.user.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;

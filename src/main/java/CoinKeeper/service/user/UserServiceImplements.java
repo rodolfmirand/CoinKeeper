@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import CoinKeeper.dto.request.UserRequest;
 import CoinKeeper.dto.response.UserResponse;
 import CoinKeeper.model.Account;
-import CoinKeeper.model.User;
+import CoinKeeper.model.user.User;
 import CoinKeeper.repository.AccountRepository;
 import CoinKeeper.repository.UserRepository;
 import CoinKeeper.util.UserMapper;

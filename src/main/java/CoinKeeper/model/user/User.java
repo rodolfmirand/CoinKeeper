@@ -1,9 +1,10 @@
-package CoinKeeper.model;
+package CoinKeeper.model.user;
 
 import java.util.UUID;
 
-import CoinKeeper.model.enums.UserRole;
-import CoinKeeper.model.enums.UserStatus;
+import CoinKeeper.model.Account;
+import CoinKeeper.model.user.enums.UserRole;
+import CoinKeeper.model.user.enums.UserStatus;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
