@@ -2,6 +2,7 @@ package CoinKeeper.model;
 
 import java.util.UUID;
 
+import CoinKeeper.model.enums.UserRole;
 import CoinKeeper.model.enums.UserStatus;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -51,6 +52,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private UserStatus status;
+
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
     @Builder
     public User(String name, String login, String email, String password, Account account, UserStatus status) {
