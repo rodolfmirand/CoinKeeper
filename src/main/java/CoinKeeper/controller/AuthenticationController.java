@@ -15,7 +15,7 @@ import CoinKeeper.service.user.UserService;
 import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
-@RequestMapping("/coinkeeper/auth")
+@RequestMapping("/coinkeeper/home")
 public class AuthenticationController {
 
     @Autowired

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import CoinKeeper.dto.request.BalanceLimitUpdateRequest;
 import CoinKeeper.dto.request.IDUserRequest;
+import CoinKeeper.dto.request.UpdateUserStatusRequest;
 import CoinKeeper.dto.request.UserRequest;
 import CoinKeeper.dto.response.AccountResponse;
 import CoinKeeper.dto.response.UserResponse;
@@ -35,24 +36,25 @@ public class UserController {
     private final AccountService accountService;
 
     // admin
-    @GetMapping("/{id}")
+    @GetMapping("/findbyid")
     public ResponseEntity<UserResponse> findById(@RequestBody IDUserRequest userID) {
         return ResponseEntity.ok().body(service.findById(userID.getId()));
     }
 
     // admin
-    @GetMapping()
+    @GetMapping("/findall")
     public ResponseEntity<List<UserResponse>> findAll() {
         return ResponseEntity.ok().body(service.findAll());
     }
 
     // @PostMapping("/register")
-    // public ResponseEntity<UserResponse> register(@RequestBody UserRequest userRequest) {
-    //     return ResponseEntity.ok().body(service.register(userRequest));
+    // public ResponseEntity<UserResponse> register(@RequestBody UserRequest
+    // userRequest) {
+    // return ResponseEntity.ok().body(service.register(userRequest));
     // }
 
-    //admin -> todos
-    //user -> apenas ele próprio
+    // admin -> todos
+    // user -> apenas ele próprio
     @PostMapping("/account/updatelimit")
     public ResponseEntity<AccountResponse> updateBalanceLimit(
             @RequestBody BalanceLimitUpdateRequest balanceLimitUpdateRequest) {
@@ -73,5 +75,11 @@ public class UserController {
     @DeleteMapping()
     public ResponseEntity<String> delete(@RequestBody IDUserRequest userID) {
         return ResponseEntity.ok().body(service.deleteById(userID.getId()));
+    }
+
+    @PostMapping()
+    public ResponseEntity<UserResponse> updateUserStatus(@RequestBody UpdateUserStatusRequest userStatusRequest) {
+        service.updateUserStatus(userStatusRequest.getId(), userStatusRequest.getCode());
+        return ResponseEntity.ok().body(new UserResponse(service.findUserById(userStatusRequest.getId())));
     }
 }

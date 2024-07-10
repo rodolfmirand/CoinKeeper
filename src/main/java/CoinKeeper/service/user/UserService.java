@@ -5,10 +5,13 @@ import java.util.UUID;
 
 import CoinKeeper.dto.request.UserRequest;
 import CoinKeeper.dto.response.UserResponse;
+import CoinKeeper.model.user.User;
 
 public interface UserService {
 
     UserResponse findById(UUID id);
+
+    User findUserById(UUID id);
 
     List<UserResponse> findAll();
 

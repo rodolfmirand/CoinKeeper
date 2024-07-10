@@ -37,7 +37,7 @@ public class UserServiceImplements implements UserService {
 
     @Override
     public UserResponse findById(UUID id) {
-        return userMapper.toUserResponse(searchUser(id));
+        return userMapper.toUserResponse(findUserById(id));
     }
 
     @Override
@@ -61,11 +61,11 @@ public class UserServiceImplements implements UserService {
 
     // @Override
     // public UserResponse register(UserRequest userRequest) {
-    //     User user = userMapper.toUser(userRequest);
-    //     Account account = new Account(user);
-    //     user.setAccount(account);
-    //     accountRepository.save(account);
-    //     return userMapper.toUserResponse(userRepository.save(user));
+    // User user = userMapper.toUser(userRequest);
+    // Account account = new Account(user);
+    // user.setAccount(account);
+    // accountRepository.save(account);
+    // return userMapper.toUserResponse(userRepository.save(user));
     // }
 
     @Override
@@ -81,7 +81,7 @@ public class UserServiceImplements implements UserService {
 
     @Override
     public UserResponse update(UserRequest userRequest, UUID id) {
-        User user = searchUser(id);
+        User user = findUserById(id);
 
         userMapper.updateUser(user, userRequest);
 
@@ -94,14 +94,15 @@ public class UserServiceImplements implements UserService {
         return "Usuário de id (" + id + ") deletado.";
     }
 
-    private User searchUser(UUID id) {
-        return userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado do banco de dados."));
+    @Override
+    public void updateUserStatus(UUID id, String code) {
+        User user = findUserById(id);
+        user.setStatus(UserStatus.readCode(code));
     }
 
     @Override
-    public void updateUserStatus(UUID id, String code) {
-        User user = searchUser(id);
-        user.setStatus(UserStatus.readCode(code));
+    public User findUserById(UUID id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado do banco de dados."));
     }
 }
