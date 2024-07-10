@@ -58,14 +58,18 @@ public class User {
     private UserRole role;
 
     @Builder
-    public User(String name, String login, String email, String password, Account account, UserStatus status) {
+    public User(String name, String login, String email, String password, Account account, UserStatus status, UserRole role) {
         this.name = name;
         this.login = login;
         this.email = email;
         this.password = password;
         this.account = account;
         this.status = UserStatus.PENDENTE;
-        this.role = UserRole.USER;
+        if(role == null){
+            this.role = UserRole.USER;
+        }else{
+            this.role = UserRole.ADMIN;
+        }
     }
 
     @Builder
