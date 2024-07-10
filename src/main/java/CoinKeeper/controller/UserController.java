@@ -77,7 +77,7 @@ public class UserController {
         return ResponseEntity.ok().body(service.deleteById(userID.getId()));
     }
 
-    @PostMapping()
+    @PostMapping("/updatestatus")
     public ResponseEntity<UserResponse> updateUserStatus(@RequestBody UpdateUserStatusRequest userStatusRequest) {
         service.updateUserStatus(userStatusRequest.getId(), userStatusRequest.getCode());
         return ResponseEntity.ok().body(new UserResponse(service.findUserById(userStatusRequest.getId())));
