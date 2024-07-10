@@ -23,4 +23,6 @@ public interface UserService {
     UserResponse update(UserRequest user, UUID id);
 
     String deleteById(UUID id);
+
+    void updateUserStatus(UUID id, String code);
 }

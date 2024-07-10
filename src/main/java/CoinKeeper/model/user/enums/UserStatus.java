@@ -35,7 +35,7 @@ public enum UserStatus {
     }
 
     @JsonCreator
-    public static UserStatus doValor(String code) {
+    public static UserStatus readCode(String code) {
         if (code.equals("A")) {
             return ATIVO;
         } else if (code.equals("I")) {

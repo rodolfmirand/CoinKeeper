@@ -12,6 +12,7 @@ import CoinKeeper.dto.request.UserRequest;
 import CoinKeeper.dto.response.UserResponse;
 import CoinKeeper.model.Account;
 import CoinKeeper.model.user.User;
+import CoinKeeper.model.user.enums.UserStatus;
 import CoinKeeper.repository.AccountRepository;
 import CoinKeeper.repository.UserRepository;
 import CoinKeeper.util.UserMapper;
@@ -96,5 +97,11 @@ public class UserServiceImplements implements UserService {
     private User searchUser(UUID id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado do banco de dados."));
+    }
+
+    @Override
+    public void updateUserStatus(UUID id, String code) {
+        User user = searchUser(id);
+        user.setStatus(UserStatus.readCode(code));
     }
 }
