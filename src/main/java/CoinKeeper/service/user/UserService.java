@@ -16,9 +16,9 @@ public interface UserService {
 
     boolean verifyEmail(String email);
 
-    UserResponse register(UserRequest user);
+    // UserResponse register(UserRequest user);
 
-    String registerNewUser(UserRequest user);
+    String register(UserRequest user);
 
     UserResponse update(UserRequest user, UUID id);
 

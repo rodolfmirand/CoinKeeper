@@ -58,17 +58,17 @@ public class UserServiceImplements implements UserService {
         return count != null && count > 0;
     }
 
-    @Override
-    public UserResponse register(UserRequest userRequest) {
-        User user = userMapper.toUser(userRequest);
-        Account account = new Account(user);
-        user.setAccount(account);
-        accountRepository.save(account);
-        return userMapper.toUserResponse(userRepository.save(user));
-    }
+    // @Override
+    // public UserResponse register(UserRequest userRequest) {
+    //     User user = userMapper.toUser(userRequest);
+    //     Account account = new Account(user);
+    //     user.setAccount(account);
+    //     accountRepository.save(account);
+    //     return userMapper.toUserResponse(userRepository.save(user));
+    // }
 
     @Override
-    public String registerNewUser(UserRequest userRequest) {
+    public String register(UserRequest userRequest) {
         User user = userMapper.toUser(userRequest);
 
         Account account = new Account(user);

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import CoinKeeper.dto.request.BalanceLimitUpdateRequest;
+import CoinKeeper.dto.request.IDUserRequest;
 import CoinKeeper.dto.request.UserRequest;
 import CoinKeeper.dto.response.AccountResponse;
 import CoinKeeper.dto.response.UserResponse;
@@ -35,8 +36,8 @@ public class UserController {
 
     // admin
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponse> findById(@PathVariable(name = "id") UUID id) {
-        return ResponseEntity.ok().body(service.findById(id));
+    public ResponseEntity<UserResponse> findById(@RequestBody IDUserRequest userID) {
+        return ResponseEntity.ok().body(service.findById(userID.getId()));
     }
 
     // admin
@@ -45,15 +46,14 @@ public class UserController {
         return ResponseEntity.ok().body(service.findAll());
     }
 
-    //remover?
-    @PostMapping("/register")
-    public ResponseEntity<UserResponse> register(@RequestBody UserRequest userRequest) {
-        return ResponseEntity.ok().body(service.register(userRequest));
-    }
+    // @PostMapping("/register")
+    // public ResponseEntity<UserResponse> register(@RequestBody UserRequest userRequest) {
+    //     return ResponseEntity.ok().body(service.register(userRequest));
+    // }
 
     //admin -> todos
     //user -> apenas ele próprio
-    @PostMapping("/conta/limite")
+    @PostMapping("/account/updatelimit")
     public ResponseEntity<AccountResponse> updateBalanceLimit(
             @RequestBody BalanceLimitUpdateRequest balanceLimitUpdateRequest) {
         return ResponseEntity.ok().body(accountService.updateBalanceLimit(balanceLimitUpdateRequest.getId_account(),
@@ -62,7 +62,7 @@ public class UserController {
 
     // admin -> todos
     // user -> apenas ele próprio
-    @PutMapping("/{id}")
+    @PutMapping()
     public ResponseEntity<UserResponse> update(@RequestBody UserRequest userRequest,
             @PathVariable(name = "id") UUID id) {
         return ResponseEntity.ok().body(service.update(userRequest, id));
@@ -70,8 +70,8 @@ public class UserController {
 
     // admin -> todos
     // user -> apenas ele próprio
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable(value = "id") UUID id) {
-        return ResponseEntity.ok().body(service.deleteById(id));
+    @DeleteMapping()
+    public ResponseEntity<String> delete(@RequestBody IDUserRequest userID) {
+        return ResponseEntity.ok().body(service.deleteById(userID.getId()));
     }
 }

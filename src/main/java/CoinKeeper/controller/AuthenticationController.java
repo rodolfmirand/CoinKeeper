@@ -49,6 +49,6 @@ public class AuthenticationController {
         if (userService.verifyEmail(userRequest.getEmail()))
             return ResponseEntity.badRequest().body("E-mail já cadastrado.");
 
-        return ResponseEntity.ok().body(userService.registerNewUser(userRequest));
+        return ResponseEntity.ok().body(userService.register(userRequest));
     }
 }
