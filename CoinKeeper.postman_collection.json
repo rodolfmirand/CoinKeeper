@@ -1,0 +1,460 @@
+{
+	"info": {
+		"_postman_id": "45d36980-9d66-4bb6-bf5d-ea91f2f062f3",
+		"name": "CoinKeeper",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34674640",
+		"_collection_link": "https://a77777-9037.postman.co/workspace/a-Workspace~758f7b2c-eb25-4eb4-8e76-ee37a7382c5d/collection/34674640-45d36980-9d66-4bb6-bf5d-ea91f2f062f3?action=share&source=collection_link&creator=34674640"
+	},
+	"item": [
+		{
+			"name": "FrontEnd Requests",
+			"item": [
+				{
+					"name": "signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"login\": \"\",\r\n    \"email\": \"\",\r\n    \"password\": \"\",\r\n    \"role\": \"\" //opcional (ADMIN ou USER)\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/coinkeeper/home/signup",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"coinkeeper",
+								"home",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"\",\r\n    \"password\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/coinkeeper/home/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"coinkeeper",
+								"home",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "BackEnd Requests",
+			"item": [
+				{
+					"name": "categories",
+					"item": [
+						{
+							"name": "register",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyb2QiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MjA3MTQ2MTksImV4cCI6MTcyMDcxNTUxOX0.rj91J044Fgc_fZja4AKvzeVSocRGbG3vDaZLI97J8HsF7XOSc1o3DMTqcA_0EsGiTgtdIDTi06eaV6GSY2XFXA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/coinkeeper/categories/register",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"coinkeeper",
+										"categories",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findall",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyb2QiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MjA3MTQ2MTksImV4cCI6MTcyMDcxNTUxOX0.rj91J044Fgc_fZja4AKvzeVSocRGbG3vDaZLI97J8HsF7XOSc1o3DMTqcA_0EsGiTgtdIDTi06eaV6GSY2XFXA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/coinkeeper/categories/findall",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"coinkeeper",
+										"categories",
+										"findall"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyb2QiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MjA3MTMyMDIsImV4cCI6MTcyMDcxNDEwMn0.U5Btpg-bnhFioNbZDc1xaHiThUo8-1gxgAyPOVpHCaSIgPI1tKbplpJO65AsZjE7O19eCBh1xbrBzvzOrHZZ6g",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/coinkeeper/categories/delete",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"coinkeeper",
+										"categories",
+										"delete"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyb2QiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MjA3MTMyMDIsImV4cCI6MTcyMDcxNDEwMn0.U5Btpg-bnhFioNbZDc1xaHiThUo8-1gxgAyPOVpHCaSIgPI1tKbplpJO65AsZjE7O19eCBh1xbrBzvzOrHZZ6g",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"\",\r\n    \"name\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/coinkeeper/categories/update",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"coinkeeper",
+										"categories",
+										"update"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "transfers",
+					"item": [
+						{
+							"name": "findall",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyb2QiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MjA3MTQ2MTksImV4cCI6MTcyMDcxNTUxOX0.rj91J044Fgc_fZja4AKvzeVSocRGbG3vDaZLI97J8HsF7XOSc1o3DMTqcA_0EsGiTgtdIDTi06eaV6GSY2XFXA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/coinkeeper/transfers/findall",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"coinkeeper",
+										"transfers",
+										"findall"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "register",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyb2QiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MjA3MTQ2MTksImV4cCI6MTcyMDcxNTUxOX0.rj91J044Fgc_fZja4AKvzeVSocRGbG3vDaZLI97J8HsF7XOSc1o3DMTqcA_0EsGiTgtdIDTi06eaV6GSY2XFXA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"amount\": ,\r\n    \"account\": \"\",\r\n    \"category\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/coinkeeper/transfers/register",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"coinkeeper",
+										"transfers",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "totalPerCategory",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyb2QiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MjA3MTQ2MTksImV4cCI6MTcyMDcxNTUxOX0.rj91J044Fgc_fZja4AKvzeVSocRGbG3vDaZLI97J8HsF7XOSc1o3DMTqcA_0EsGiTgtdIDTi06eaV6GSY2XFXA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"account\": \"\",\r\n    \"category\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/coinkeeper/transfers/total",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"coinkeeper",
+										"transfers",
+										"total"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "users",
+					"item": [
+						{
+							"name": "findall",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyb2QiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MjA3MTM4NDcsImV4cCI6MTcyMDcxNDc0N30.cKhwxTkeyWZiERHkO1EMKmuEVfLODCkfa-6SFOUwgUN7bhFo5ePOnRs-sScbN1Z01eOPtfBcQcTDlfvKVnxVGg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/coinkeeper/users/findall",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"coinkeeper",
+										"users",
+										"findall"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateStatus",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyb2QiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MjA3MTEzNDMsImV4cCI6MTcyMDcxMjI0M30.wJ-G8V6BCfNIeXr359GqegaMQlHep0_PW4HwakeuGkNnR2Eoud2lTty38Mz2Vguw62gKUSDBnq5mozaoKSOteA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"\",\r\n    \"code\":\"\" //A, I ou P\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/coinkeeper/users/updatestatus",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"coinkeeper",
+										"users",
+										"updatestatus"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateAccountLimit",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyb2QiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MjA3MTQ2MTksImV4cCI6MTcyMDcxNTUxOX0.rj91J044Fgc_fZja4AKvzeVSocRGbG3vDaZLI97J8HsF7XOSc1o3DMTqcA_0EsGiTgtdIDTi06eaV6GSY2XFXA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id_account\": \"\",\r\n    \"amount\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/coinkeeper/account/updatelimit",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"coinkeeper",
+										"account",
+										"updatelimit"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
