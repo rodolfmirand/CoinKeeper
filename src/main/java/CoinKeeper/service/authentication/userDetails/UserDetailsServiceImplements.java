@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import CoinKeeper.model.user.User;
 import CoinKeeper.repository.UserRepository;
 
 @Service
@@ -16,7 +17,7 @@ public class UserDetailsServiceImplements implements UserDetailsService{
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return UserDetailsImpl.build(repository.findByLogin(username).get());
+        return new User(repository.findByLogin(username).get());
     }
     
 }

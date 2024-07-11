@@ -1,6 +1,12 @@
 package CoinKeeper.model.user;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import CoinKeeper.model.Account;
 import CoinKeeper.model.user.enums.UserRole;
@@ -27,7 +33,7 @@ import lombok.Setter;
 @Table(name = "usuarios")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Builder
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -58,21 +64,42 @@ public class User {
     private UserRole role;
 
     @Builder
-    public User(String name, String login, String email, String password, Account account, UserStatus status, UserRole role) {
+    public User(String name, String login, String email, String password, Account account, UserRole role) {
         this.name = name;
         this.login = login;
         this.email = email;
         this.password = password;
         this.account = account;
         this.status = UserStatus.PENDENTE;
-        if(role == null){
-            this.role = UserRole.USER;
-        }else{
-            this.role = UserRole.ADMIN;
-        }
+        this.role = role;
+    }
+
+    @Builder
+    public User (User user){
+        this.name = user.getName();
+        this.login = user.getLogin();
+        this.email = user.getEmail();
+        this.password = user.getPassword();
+        this.account = user.getAccount();
+        this.status = user.getStatus();
+        this.role = user.getRole();
     }
 
     @Builder
     public User() {
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (this.role.equals(UserRole.ADMIN)) {
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        } else {
+            return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        }
+    }
+
+    @Override
+    public String getUsername() {
+        return this.login;
     }
 }

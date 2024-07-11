@@ -8,7 +8,8 @@ import javax.crypto.SecretKey;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import CoinKeeper.service.authentication.userDetails.UserDetailsImpl;
+import CoinKeeper.model.user.User;
+import CoinKeeper.model.user.enums.UserRole;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
@@ -25,11 +26,11 @@ public class JwtUtils {
     @Value("${coinkeeper.jwtExpirationMs}")
     private int jwtExpirationMs; 
 
-    public String generateTokenFromUserDetailsImp(UserDetailsImpl userDetails) {
-        return buildJwtToken(userDetails.getUsername(), jwtExpirationMs);
+    public String generateTokenFromUserDetailsImp(User userDetails) {
+        return buildJwtToken(userDetails.getUsername(), userDetails.getRole(), jwtExpirationMs);
     }
 
-    private String buildJwtToken(String subject, long expirationMs) {
+    private String buildJwtToken(String subject, UserRole role, long expirationMs) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + expirationMs);
 
@@ -37,6 +38,7 @@ public class JwtUtils {
 
         return Jwts.builder()
                 .subject(subject)
+                .claim("role", role)
                 .issuedAt(now)
                 .expiration(expiryDate)
                 .signWith(key)
@@ -65,7 +67,6 @@ public class JwtUtils {
 
         } catch (IllegalArgumentException e) {
             System.out.println("Argumento inválido. " + e.getMessage());
-
         }
 
         return false;

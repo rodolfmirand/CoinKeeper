@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import CoinKeeper.configuration.jwt.JwtUtils;
 import CoinKeeper.dto.request.AuthenticationRequest;
-import CoinKeeper.service.authentication.userDetails.UserDetailsImpl;
+import CoinKeeper.model.user.User;
 
 @Service
 public class AuthService {
@@ -30,7 +30,7 @@ public class AuthService {
                     authDTO.getLogin(), authDTO.getPassword()); // cria mecanismo de credencial para o spring
             Authentication authentication = authenticationManager.authenticate(userAuth); // prepara mecanismo para
                                                                                           // autenticação
-            UserDetailsImpl userAuthenticate = (UserDetailsImpl) authentication.getPrincipal(); // busca usuario logado
+            User userAuthenticate = (User) authentication.getPrincipal(); // busca usuario logado
 
             return jwtUtils.generateTokenFromUserDetailsImp(userAuthenticate);
 
@@ -40,29 +40,4 @@ public class AuthService {
 
         return null;
     }
-
-    /*
-     * public AuthenticationResponseDTO login(AuthenticationRequestDTO authDTO) {
-     * try {
-     * UsernamePasswordAuthenticationToken userAuth = new
-     * UsernamePasswordAuthenticationToken(
-     * authDTO.getLogin(), authDTO.getPassword()); // cria mecanismo de credencial
-     * para o spring
-     * Authentication authentication = authenticationManager.authenticate(userAuth);
-     * // prepara mecanismo para
-     * // autenticação
-     * UserDetailsImpl userAuthenticate = (UserDetailsImpl)
-     * authentication.getPrincipal(); // busca usuario logado
-     * 
-     * String token = jwtUtils.generateTokenFromUserDetailsImp(userAuthenticate);
-     * 
-     * return new AuthenticationResponseDTO(token);
-     * } catch (BadCredentialsException e) {
-     * System.out.println(e.getMessage());
-     * }
-     * 
-     * return null;
-     * }
-     */
-
 }

@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,6 +44,7 @@ public class UserController {
 
     // admin
     @GetMapping("/findall")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<UserResponse>> findAll() {
         return ResponseEntity.ok().body(service.findAll());
     }
@@ -64,7 +66,7 @@ public class UserController {
 
     // admin -> todos
     // user -> apenas ele próprio
-    @PutMapping()
+    @PutMapping("/update")
     public ResponseEntity<UserResponse> update(@RequestBody UserRequest userRequest,
             @PathVariable(name = "id") UUID id) {
         return ResponseEntity.ok().body(service.update(userRequest, id));
@@ -72,11 +74,12 @@ public class UserController {
 
     // admin -> todos
     // user -> apenas ele próprio
-    @DeleteMapping()
+    @DeleteMapping("/delete")
     public ResponseEntity<String> delete(@RequestBody IDUserRequest userID) {
         return ResponseEntity.ok().body(service.deleteById(userID.getId()));
     }
 
+    //    
     @PostMapping("/updatestatus")
     public ResponseEntity<UserResponse> updateUserStatus(@RequestBody UpdateUserStatusRequest userStatusRequest) {
         service.updateUserStatus(userStatusRequest.getId(), userStatusRequest.getCode());

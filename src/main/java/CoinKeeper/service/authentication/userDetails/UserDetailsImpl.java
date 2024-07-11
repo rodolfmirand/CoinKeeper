@@ -11,24 +11,22 @@ import org.springframework.security.core.userdetails.UserDetails;
 import CoinKeeper.model.user.User;
 import CoinKeeper.model.user.enums.UserRole;
 import CoinKeeper.model.user.enums.UserStatus;
+import lombok.Getter;
 
+@Getter
 public class UserDetailsImpl implements UserDetails {
 
-    @SuppressWarnings("unused")
     private UUID id;
 
     private String username;
 
-    @SuppressWarnings("unused")
     private String email;
 
     private String password;
 
-    @SuppressWarnings("unused")
     private UserStatus status;
 
     private UserRole role;
-
 
     public static UserDetailsImpl build(User user) {
         return new UserDetailsImpl(
@@ -37,19 +35,16 @@ public class UserDetailsImpl implements UserDetails {
                 user.getEmail(),
                 user.getPassword(),
                 user.getStatus(),
-                UserRole.USER);
+                user.getRole());
     }
-
-    // private Collection<? extends GrantedAuthority> authorities;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (this.role == UserRole.ADMIN) {
+        if (this.role.equals(UserRole.ADMIN)) {
             return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
         } else {
             return List.of(new SimpleGrantedAuthority("ROLE_USER"));
         }
-
     }
 
     @Override
