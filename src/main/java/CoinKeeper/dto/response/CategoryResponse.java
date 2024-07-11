@@ -12,12 +12,8 @@ public class CategoryResponse {
 
     private String name;
 
-    private String description;
-
     public CategoryResponse(Category category) {
         this.id = category.getId();
         this.name = category.getName();
-        this.description = category.getDescription();
     }
-
 }

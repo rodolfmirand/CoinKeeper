@@ -47,9 +47,6 @@ public class CategoryServiceImplements implements CategoryService {
         if (categoryUpdateRequest.getName() != "")
             category.setName(categoryUpdateRequest.getName());
 
-        if (categoryUpdateRequest.getDescription() != "")
-            category.setDescription(categoryUpdateRequest.getDescription());
-
         categoryRepository.save(category);
         return new CategoryResponse(category);
     }

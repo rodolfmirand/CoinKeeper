@@ -1,13 +1,11 @@
 package CoinKeeper.controller;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import CoinKeeper.dto.request.CategoryRequest;
 import CoinKeeper.dto.request.CategoryUpdateRequest;
+import CoinKeeper.dto.request.IdRequest;
 import CoinKeeper.dto.response.CategoryResponse;
 import CoinKeeper.service.category.CategoryService;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +27,7 @@ public class CategoryController {
     @Autowired
     private final CategoryService service;
 
-    @GetMapping
+    @GetMapping("/findall")
     public ResponseEntity<List<CategoryResponse>> findAll() {
         return ResponseEntity.ok().body(service.findAll());
     }
@@ -43,8 +42,8 @@ public class CategoryController {
         return ResponseEntity.ok().body(service.update(categoryUpdateRequest, categoryUpdateRequest.getId()));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable(value = "id") UUID id) {
-        return ResponseEntity.ok().body(service.deleteById(id));
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> delete(@RequestBody IdRequest IDCategory) {
+        return ResponseEntity.ok().body(service.deleteById(IDCategory.getId()));
     }
 }

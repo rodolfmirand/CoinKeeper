@@ -11,5 +11,4 @@ public class CategoryUpdateRequest {
 
     private String name;
 
-    private String description;
 }

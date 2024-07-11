@@ -33,16 +33,12 @@ public class Category {
     @Column(name = "nome", nullable = false, unique = true)
     private String name;
 
-    @Column(name = "descricao", unique = true)
-    private String description;
-
     @OneToMany
     private List<Transfer> transfers;
 
     @Builder
-    public Category(String name, String description, List<Transfer> transfers) {
+    public Category(String name, List<Transfer> transfers) {
         this.name = name;
-        this.description = description;
         this.transfers = transfers;
     }
 

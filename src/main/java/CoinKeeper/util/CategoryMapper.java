@@ -15,7 +15,6 @@ public class CategoryMapper {
     public Category toCategoryModel(CategoryRequest categoryRequest){
         return Category.builder()
                     .name(categoryRequest.getName())
-                    .description(categoryRequest.getDescription())
                     .build();
     }
 

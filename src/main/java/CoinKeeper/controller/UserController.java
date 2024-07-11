@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import CoinKeeper.dto.request.IDUserRequest;
+import CoinKeeper.dto.request.IdRequest;
 import CoinKeeper.dto.request.UpdateUserStatusRequest;
 import CoinKeeper.dto.request.UserRequest;
 import CoinKeeper.dto.response.UserResponse;
@@ -31,7 +31,7 @@ public class UserController {
     private final UserService service;
 
     @GetMapping("/findbyid")
-    public ResponseEntity<UserResponse> findById(@RequestBody IDUserRequest userID) {
+    public ResponseEntity<UserResponse> findById(@RequestBody IdRequest userID) {
         return ResponseEntity.ok().body(service.findById(userID.getId()));
     }
 
@@ -54,7 +54,7 @@ public class UserController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<String> delete(@RequestBody IDUserRequest userID) {
+    public ResponseEntity<String> delete(@RequestBody IdRequest userID) {
         return ResponseEntity.ok().body(service.deleteById(userID.getId()));
     }
 
