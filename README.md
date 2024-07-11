@@ -10,3 +10,7 @@ Este é um projeto pessoal desenvolvido em Java, SpringBoot, HTML, CSS e Javascp
 - Registro de transações de entrada e saída de dinheiro.
 - Categorização de despesas.
 - Visualização de histórico de transações.
+
+## Testes
+
+Para os testes dos endpoints foi utilizado o Postman. O arquivo com o template está dentro do projeto.
