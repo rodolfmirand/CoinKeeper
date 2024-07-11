@@ -30,13 +30,11 @@ public class UserController {
     @Autowired
     private final UserService service;
 
-    // admin
     @GetMapping("/findbyid")
     public ResponseEntity<UserResponse> findById(@RequestBody IDUserRequest userID) {
         return ResponseEntity.ok().body(service.findById(userID.getId()));
     }
 
-    // admin
     @GetMapping("/findall")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<UserResponse>> findAll() {
@@ -49,22 +47,17 @@ public class UserController {
     // return ResponseEntity.ok().body(service.register(userRequest));
     // }
 
-    // admin -> todos
-    // user -> apenas ele próprio
     @PutMapping("/update")
     public ResponseEntity<UserResponse> update(@RequestBody UserRequest userRequest,
             @PathVariable(name = "id") UUID id) {
         return ResponseEntity.ok().body(service.update(userRequest, id));
     }
 
-    // admin -> todos
-    // user -> apenas ele próprio
     @DeleteMapping("/delete")
     public ResponseEntity<String> delete(@RequestBody IDUserRequest userID) {
         return ResponseEntity.ok().body(service.deleteById(userID.getId()));
     }
 
-    //    
     @PostMapping("/updatestatus")
     public ResponseEntity<UserResponse> updateUserStatus(@RequestBody UpdateUserStatusRequest userStatusRequest) {
         service.updateUserStatus(userStatusRequest.getId(), userStatusRequest.getCode());

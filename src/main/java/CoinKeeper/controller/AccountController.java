@@ -16,12 +16,10 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping(path = "/coinkeeper/account")
 @RequiredArgsConstructor
 public class AccountController {
-    
+
     @Autowired
     private final AccountService accountService;
 
-    // admin -> todos
-    // user -> apenas ele próprio
     @PostMapping("/updatelimit")
     public ResponseEntity<AccountResponse> updateBalanceLimit(
             @RequestBody BalanceLimitUpdateRequest balanceLimitUpdateRequest) {

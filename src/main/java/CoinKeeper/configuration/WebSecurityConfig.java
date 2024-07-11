@@ -48,12 +48,17 @@ public class WebSecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/coinkeeper/home/**").permitAll()
-                        .requestMatchers("/coinkeeper/users/**").hasRole("ADMIN")
-                        .requestMatchers("/coinkeeper/users/account/**",
+                        .requestMatchers("/coinkeeper/users/**", 
+                                "/coinkeeper/categories/**",
+                                "/coinkeeper/transfers/findall")
+                        .hasRole("ADMIN")
+                        .requestMatchers("/coinkeeper/account/**",
+                                "/coinkeeper/transfers/total",
+                                "/coinkeeper/transfers/register",
                                 "/coinkeeper/users/updatestatus",
                                 "/coinkeeper/users/update",
-                                "/coinkeeper/users/update")
-                        .hasAnyRole("ADMIN", "USER")
+                                "/coinkeeper/users/delete")
+                        .hasAnyRole("USER", "ADMIN")
                         .anyRequest().authenticated());
 
         http.addFilterBefore(authFilterToken(), UsernamePasswordAuthenticationFilter.class);
