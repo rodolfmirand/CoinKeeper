@@ -15,13 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import CoinKeeper.dto.request.BalanceLimitUpdateRequest;
 import CoinKeeper.dto.request.IDUserRequest;
 import CoinKeeper.dto.request.UpdateUserStatusRequest;
 import CoinKeeper.dto.request.UserRequest;
-import CoinKeeper.dto.response.AccountResponse;
 import CoinKeeper.dto.response.UserResponse;
-import CoinKeeper.service.account.AccountService;
 import CoinKeeper.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 
@@ -32,9 +29,6 @@ public class UserController {
 
     @Autowired
     private final UserService service;
-
-    @Autowired
-    private final AccountService accountService;
 
     // admin
     @GetMapping("/findbyid")
@@ -54,15 +48,6 @@ public class UserController {
     // userRequest) {
     // return ResponseEntity.ok().body(service.register(userRequest));
     // }
-
-    // admin -> todos
-    // user -> apenas ele próprio
-    @PostMapping("/account/updatelimit")
-    public ResponseEntity<AccountResponse> updateBalanceLimit(
-            @RequestBody BalanceLimitUpdateRequest balanceLimitUpdateRequest) {
-        return ResponseEntity.ok().body(accountService.updateBalanceLimit(balanceLimitUpdateRequest.getId_account(),
-                balanceLimitUpdateRequest.getAmount()));
-    }
 
     // admin -> todos
     // user -> apenas ele próprio
