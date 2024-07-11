@@ -1,4 +1,4 @@
-package CoinKeeper.service.authentication.userDetails;
+package CoinKeeper.service.authentication;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

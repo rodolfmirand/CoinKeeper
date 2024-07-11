@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import CoinKeeper.service.authentication.userDetails.UserDetailsServiceImplements;
+import CoinKeeper.service.authentication.UserDetailsServiceImplements;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
