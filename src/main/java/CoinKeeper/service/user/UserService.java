@@ -5,10 +5,13 @@ import java.util.UUID;
 
 import CoinKeeper.dto.request.UserRequest;
 import CoinKeeper.dto.response.UserResponse;
+import CoinKeeper.model.user.User;
 
 public interface UserService {
 
     UserResponse findById(UUID id);
+
+    User findUserById(UUID id);
 
     List<UserResponse> findAll();
 
@@ -16,11 +19,13 @@ public interface UserService {
 
     boolean verifyEmail(String email);
 
-    UserResponse register(UserRequest user);
+    // UserResponse register(UserRequest user);
 
-    String registerNewUser(UserRequest user);
+    String register(UserRequest user);
 
     UserResponse update(UserRequest user, UUID id);
 
     String deleteById(UUID id);
+
+    void updateUserStatus(UUID id, String code);
 }

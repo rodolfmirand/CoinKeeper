@@ -1,4 +1,4 @@
-package CoinKeeper.model.enums;
+package CoinKeeper.model.user.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -7,7 +7,7 @@ public enum UserStatus {
 
     ATIVO("A", "Ativo"),
     INATIVO("I", "Inativo"),
-    PENDENTE("p", "Pendente");
+    PENDENTE("P", "Pendente");
 
     private String code;
     private String description;
@@ -35,7 +35,7 @@ public enum UserStatus {
     }
 
     @JsonCreator
-    public static UserStatus doValor(String code) {
+    public static UserStatus readCode(String code) {
         if (code.equals("A")) {
             return ATIVO;
         } else if (code.equals("I")) {

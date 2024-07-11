@@ -72,10 +72,10 @@ public class TransferServiceImplements implements TransferService {
 
     @Override
     public TransferSumResponse getTotalExpense(Transfer transfer) {
-        String sql = "SELECT SUM(valor) AS somaValores " +
+        String sql = "SELECT SUM(valor) AS soma " +
                 "FROM transacoes " +
-                "WHERE categoria_id = '" + transfer.getCategory().getId() + "' " +
-                "AND conta_id = '" + transfer.getAccount().getId() + "';";
+                "WHERE category_id = '" + transfer.getCategory().getId() + "' " +
+                "AND account_id = '" + transfer.getAccount().getId() + "';";
 
         return new TransferSumResponse(transfer.getCategory().getId(), transfer.getAccount().getId(),
                 transfer.getAccount().getUser().getName(),

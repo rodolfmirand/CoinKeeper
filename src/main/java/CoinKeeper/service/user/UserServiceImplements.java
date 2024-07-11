@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 import CoinKeeper.dto.request.UserRequest;
 import CoinKeeper.dto.response.UserResponse;
 import CoinKeeper.model.Account;
-import CoinKeeper.model.User;
-import CoinKeeper.model.enums.UserStatus;
+import CoinKeeper.model.user.User;
+import CoinKeeper.model.user.enums.UserStatus;
 import CoinKeeper.repository.AccountRepository;
 import CoinKeeper.repository.UserRepository;
 import CoinKeeper.util.UserMapper;
@@ -37,7 +37,7 @@ public class UserServiceImplements implements UserService {
 
     @Override
     public UserResponse findById(UUID id) {
-        return userMapper.toUserResponse(searchUser(id));
+        return userMapper.toUserResponse(findUserById(id));
     }
 
     @Override
@@ -59,19 +59,18 @@ public class UserServiceImplements implements UserService {
         return count != null && count > 0;
     }
 
-    @Override
-    public UserResponse register(UserRequest userRequest) {
-        User user = userMapper.toUser(userRequest);
-        Account account = new Account(user);
-        user.setAccount(account);
-        accountRepository.save(account);
-        return userMapper.toUserResponse(userRepository.save(user));
-    }
+    // @Override
+    // public UserResponse register(UserRequest userRequest) {
+    // User user = userMapper.toUser(userRequest);
+    // Account account = new Account(user);
+    // user.setAccount(account);
+    // accountRepository.save(account);
+    // return userMapper.toUserResponse(userRepository.save(user));
+    // }
 
     @Override
-    public String registerNewUser(UserRequest userRequest) {
+    public String register(UserRequest userRequest) {
         User user = userMapper.toUser(userRequest);
-        user.setStatus(UserStatus.PENDENTE);
 
         Account account = new Account(user);
         user.setAccount(account);
@@ -82,7 +81,7 @@ public class UserServiceImplements implements UserService {
 
     @Override
     public UserResponse update(UserRequest userRequest, UUID id) {
-        User user = searchUser(id);
+        User user = findUserById(id);
 
         userMapper.updateUser(user, userRequest);
 
@@ -95,7 +94,14 @@ public class UserServiceImplements implements UserService {
         return "Usuário de id (" + id + ") deletado.";
     }
 
-    private User searchUser(UUID id) {
+    @Override
+    public void updateUserStatus(UUID id, String code) {
+        User user = findUserById(id);
+        user.setStatus(UserStatus.readCode(code));
+    }
+
+    @Override
+    public User findUserById(UUID id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado do banco de dados."));
     }

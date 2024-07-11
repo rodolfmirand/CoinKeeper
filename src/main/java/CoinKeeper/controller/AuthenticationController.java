@@ -15,7 +15,7 @@ import CoinKeeper.service.user.UserService;
 import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
-@RequestMapping("/coinkeeper/auth")
+@RequestMapping("/coinkeeper/home")
 public class AuthenticationController {
 
     @Autowired
@@ -24,6 +24,7 @@ public class AuthenticationController {
     @Autowired
     private UserService userService;
 
+    //aberto
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthenticationRequest authRequest, HttpServletResponse response) {
         if (userService.verifyLogin(authRequest.getLogin())) {
@@ -39,14 +40,15 @@ public class AuthenticationController {
         return ResponseEntity.badRequest().body("Login não encontrado.");
     }
 
+    //aberto
     @PostMapping("/signup")
-    public ResponseEntity<?> registerNewUser(@RequestBody UserRequest userRequest) {
+    public ResponseEntity<?> register(@RequestBody UserRequest userRequest) {
         if (userService.verifyLogin(userRequest.getLogin()))
             return ResponseEntity.badRequest().body("Login já cadastrado.");
 
         if (userService.verifyEmail(userRequest.getEmail()))
             return ResponseEntity.badRequest().body("E-mail já cadastrado.");
 
-        return ResponseEntity.ok().body(userService.registerNewUser(userRequest));
+        return ResponseEntity.ok().body(userService.register(userRequest));
     }
 }

@@ -1,8 +1,16 @@
-package CoinKeeper.model;
+package CoinKeeper.model.user;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
-import CoinKeeper.model.enums.UserStatus;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import CoinKeeper.model.Account;
+import CoinKeeper.model.user.enums.UserRole;
+import CoinKeeper.model.user.enums.UserStatus;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,7 +33,7 @@ import lombok.Setter;
 @Table(name = "usuarios")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Builder
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -52,17 +60,46 @@ public class User {
     @Column(nullable = false)
     private UserStatus status;
 
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
+
     @Builder
-    public User(String name, String login, String email, String password, Account account, UserStatus status) {
+    public User(String name, String login, String email, String password, Account account, UserRole role) {
         this.name = name;
         this.login = login;
         this.email = email;
         this.password = password;
         this.account = account;
-        this.status = status;
+        this.status = UserStatus.PENDENTE;
+        this.role = role;
+    }
+
+    @Builder
+    public User (User user){
+        this.name = user.getName();
+        this.login = user.getLogin();
+        this.email = user.getEmail();
+        this.password = user.getPassword();
+        this.account = user.getAccount();
+        this.status = user.getStatus();
+        this.role = user.getRole();
     }
 
     @Builder
     public User() {
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (this.role.equals(UserRole.ADMIN)) {
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        } else {
+            return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        }
+    }
+
+    @Override
+    public String getUsername() {
+        return this.login;
     }
 }

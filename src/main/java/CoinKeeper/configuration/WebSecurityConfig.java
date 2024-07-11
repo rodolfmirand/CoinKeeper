@@ -13,7 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import CoinKeeper.configuration.jwt.AuthEntryPointJwt;
 import CoinKeeper.configuration.jwt.AuthFilterToken;
@@ -48,15 +47,23 @@ public class WebSecurityConfig {
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/coinkeeper/auth/**").permitAll()
-                        .requestMatchers("/coinkeeper/home", "/coinkeeper/login", "/coinkeeper/cadastrar").permitAll()
-                        .requestMatchers("/static/**", "/css/**", "/js/**", "/images/**").permitAll()
-                        .anyRequest().authenticated())
-                .logout(lOut -> lOut.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
-                        .deleteCookies("dummyCookies")
-                        .logoutSuccessUrl("/coinkeeper/login"));
+                        .requestMatchers("/coinkeeper/home/**").permitAll()
+                        .requestMatchers("/coinkeeper/users/**", 
+                                "/coinkeeper/categories/**",
+                                "/coinkeeper/transfers/findall")
+                        .hasRole("ADMIN")
+                        .requestMatchers("/coinkeeper/account/**",
+                                "/coinkeeper/transfers/total",
+                                "/coinkeeper/transfers/register",
+                                "/coinkeeper/users/updatestatus",
+                                "/coinkeeper/users/update",
+                                "/coinkeeper/users/delete")
+                        .hasAnyRole("USER", "ADMIN")
+                        .anyRequest().authenticated());
 
         http.addFilterBefore(authFilterToken(), UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
+
     }
 }

@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,11 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import CoinKeeper.dto.request.BalanceLimitUpdateRequest;
+import CoinKeeper.dto.request.IdRequest;
+import CoinKeeper.dto.request.UpdateUserStatusRequest;
 import CoinKeeper.dto.request.UserRequest;
-import CoinKeeper.dto.response.AccountResponse;
 import CoinKeeper.dto.response.UserResponse;
-import CoinKeeper.service.account.AccountService;
 import CoinKeeper.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 
@@ -30,37 +30,37 @@ public class UserController {
     @Autowired
     private final UserService service;
 
-    @Autowired
-    private final AccountService accountService;
-
-    @GetMapping("/{id}")
-    public ResponseEntity<UserResponse> findById(@PathVariable(name = "id") UUID id) {
-        return ResponseEntity.ok().body(service.findById(id));
+    @GetMapping("/findbyid")
+    public ResponseEntity<UserResponse> findById(@RequestBody IdRequest userID) {
+        return ResponseEntity.ok().body(service.findById(userID.getId()));
     }
 
-    @GetMapping()
+    @GetMapping("/findall")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<UserResponse>> findAll() {
         return ResponseEntity.ok().body(service.findAll());
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<UserResponse> register(@RequestBody UserRequest userRequest) {
-        return ResponseEntity.ok().body(service.register(userRequest));
-    }
+    // @PostMapping("/register")
+    // public ResponseEntity<UserResponse> register(@RequestBody UserRequest
+    // userRequest) {
+    // return ResponseEntity.ok().body(service.register(userRequest));
+    // }
 
-    @PostMapping("/conta/limite")
-    public ResponseEntity<AccountResponse> updateLimiteConta(@RequestBody BalanceLimitUpdateRequest balanceLimitUpdateRequest){
-        return ResponseEntity.ok().body(accountService.updateBalanceLimit(balanceLimitUpdateRequest.getId_account(), balanceLimitUpdateRequest.getAmount()));
-    }
-
-    @PutMapping("/{id}")
+    @PutMapping("/update")
     public ResponseEntity<UserResponse> update(@RequestBody UserRequest userRequest,
             @PathVariable(name = "id") UUID id) {
         return ResponseEntity.ok().body(service.update(userRequest, id));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable(value = "id") UUID id) {
-        return ResponseEntity.ok().body(service.deleteById(id));
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> delete(@RequestBody IdRequest userID) {
+        return ResponseEntity.ok().body(service.deleteById(userID.getId()));
+    }
+
+    @PostMapping("/updatestatus")
+    public ResponseEntity<UserResponse> updateUserStatus(@RequestBody UpdateUserStatusRequest userStatusRequest) {
+        service.updateUserStatus(userStatusRequest.getId(), userStatusRequest.getCode());
+        return ResponseEntity.ok().body(new UserResponse(service.findUserById(userStatusRequest.getId())));
     }
 }

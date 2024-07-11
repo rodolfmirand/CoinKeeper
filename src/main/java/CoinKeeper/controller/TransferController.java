@@ -19,7 +19,7 @@ import CoinKeeper.util.TransferMapper;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/coinkeeper/transacoes")
+@RequestMapping("/coinkeeper/transfers")
 @RequiredArgsConstructor
 public class TransferController {
 
@@ -29,7 +29,7 @@ public class TransferController {
     @Autowired
     private TransferMapper mapper;
 
-    @GetMapping
+    @GetMapping("/findall")
     public ResponseEntity<List<TransferResponse>> findAll() {
         return ResponseEntity.ok().body(service.findAll());
     }
@@ -39,7 +39,7 @@ public class TransferController {
         return ResponseEntity.ok().body(service.getTotalExpense(mapper.transferSumRequestToTransfer(transferSumRequest)));
     }
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<TransferResponse> register(@RequestBody TransferRequest transferRequest){
         return ResponseEntity.ok().body(service.register(transferRequest));
     }

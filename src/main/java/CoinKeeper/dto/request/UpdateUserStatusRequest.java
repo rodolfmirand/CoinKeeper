@@ -5,10 +5,9 @@ import java.util.UUID;
 import lombok.Getter;
 
 @Getter
-public class CategoryUpdateRequest {
+public class UpdateUserStatusRequest {
+    
+    UUID id;
 
-    private UUID id;
-
-    private String name;
-
+    String code;
 }
