@@ -4,6 +4,8 @@ CoinKeeper é um gerenciador para auxiliar no controle e gestão de gastos finan
 
 Este é um projeto pessoal desenvolvido em Java, SpringBoot, HTML, CSS e Javascpript.
 
+Para os testes dos endpoints foi utilizado o Postman. O arquivo com o template está dentro do projeto.
+
 ## Funcionalidades
 
 - CRUD
@@ -11,6 +13,3 @@ Este é um projeto pessoal desenvolvido em Java, SpringBoot, HTML, CSS e Javascp
 - Categorização de despesas.
 - Visualização de histórico de transações.
 
-## Testes
-
-Para os testes dos endpoints foi utilizado o Postman. O arquivo com o template está dentro do projeto.
