@@ -13,6 +13,8 @@ public class CookieService {
         Cookie cookie = new Cookie("token", token);
         cookie.setPath("/");
         cookie.setMaxAge(300);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true); 
 
         response.addCookie(cookie);
     }
