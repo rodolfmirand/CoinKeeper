@@ -49,10 +49,10 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/coinkeeper/home/**").permitAll()
                         .requestMatchers("/coinkeeper/users/**", 
-                                "/coinkeeper/categories/**",
                                 "/coinkeeper/transfers/findall")
                         .hasRole("ADMIN")
                         .requestMatchers("/coinkeeper/account/**",
+                                "/coinkeeper/categories/**",
                                 "/coinkeeper/transfers/total",
                                 "/coinkeeper/transfers/register",
                                 "/coinkeeper/users/updatestatus",
