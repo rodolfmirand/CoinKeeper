@@ -45,4 +45,11 @@ public class Category {
     @Builder
     public Category() {
     }
+
+    @Builder
+    public Category(UUID id, String name, List<Transfer> transfers) {
+        this.id = id;
+        this.name = name;
+        this.transfers = transfers;
+    }
 }

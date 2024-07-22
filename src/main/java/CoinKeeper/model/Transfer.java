@@ -46,15 +46,26 @@ public class Transfer {
     private Category category;
 
     @Builder
-    public Transfer(double amount, String description, Account account, Category category) {
+    public Transfer(double amount, Account account, Category category) {
         this.date = LocalDate.now();
         this.amount = amount;
-        this.description = description;
         this.account = account;
         this.category = category;
+        this.type = category.getName();
     }
 
     @Builder
     public Transfer() {
+    }
+
+    @Builder
+    public Transfer(UUID id, String type, LocalDate date, double amount, String description, Account account, Category category) {
+        this.id = id;
+        this.type = type;
+        this.date = date;
+        this.amount = amount;
+        this.description = description;
+        this.account = account;
+        this.category = category;
     }
 }

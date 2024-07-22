@@ -54,4 +54,11 @@ public class Account {
         this.setBalance(newBalance);
         return newBalance;
     }
+
+    @Builder
+    public Account(UUID id, User user, double balance) {
+        this.id = id;
+        this.user = user;
+        this.balance = balance;
+    }
 }

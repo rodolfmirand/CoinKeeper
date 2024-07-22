@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
+import CoinKeeper.dto.request.UserRequest;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -101,5 +102,29 @@ public class User implements UserDetails {
     @Override
     public String getUsername() {
         return this.login;
+    }
+
+    //construtor usado apenas para teste unitários
+    @Builder
+    public User(UUID id, String name, String login, String email, String password, Account account, UserStatus status, UserRole role) {
+        this.id = id;
+        this.name = name;
+        this.login = login;
+        this.email = email;
+        this.password = password;
+        this.account = account;
+        this.status = status;
+        this.role = role;
+    }
+
+    //construtor usado apenas para teste unitários
+    @Builder
+    public User(UserRequest userRequest){
+        this.name = userRequest.getName();
+        this.login = userRequest.getLogin();
+        this.email = userRequest.getEmail();
+        this.password = userRequest.getPassword();
+        this.status = UserStatus.PENDENTE;
+        this.role = userRequest.getRole();
     }
 }

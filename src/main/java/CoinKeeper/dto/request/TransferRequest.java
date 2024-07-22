@@ -2,9 +2,9 @@ package CoinKeeper.dto.request;
 
 import java.util.UUID;
 
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+@Data
 public class TransferRequest {
     
     private double amount;
@@ -12,5 +12,4 @@ public class TransferRequest {
     private UUID account;
 
     private UUID category;
-
 }

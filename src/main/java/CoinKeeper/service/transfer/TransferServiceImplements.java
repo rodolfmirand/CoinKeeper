@@ -36,6 +36,7 @@ public class TransferServiceImplements implements TransferService {
     @Autowired
     private final AccountRepository accountRepository;
 
+    @Autowired
     private final TransferMapper transferMapper;
 
     @Override
@@ -45,21 +46,16 @@ public class TransferServiceImplements implements TransferService {
 
     @Override
     public TransferResponse register(TransferRequest transferRequest) {
-        Transfer transfer = new Transfer();
-        transfer.setAccount(searchAccount(transferRequest.getAccount()));
-        transfer.setAmount(transferRequest.getAmount());
-        transfer.setCategory(searchCategoria(transferRequest.getCategory()));
-        transfer.setDate(LocalDate.now());
-        transfer.setType(transfer.getCategory().getName());
+        Account transferAccount = accountRepository.findById(transferRequest.getAccount()).orElse(null);
+        Category transferCategory = categoryRepository.findById(transferRequest.getCategory()).orElse(null);
 
-        Account account = transfer.getAccount();
-        double responseUpdateBalance = account.updateBalance(transfer.getAmount());
+        Transfer transfer = new Transfer(transferRequest.getAmount(), transferAccount, transferCategory);
 
-        if (responseUpdateBalance == -1)
+        if (transfer.getAccount().updateBalance(transfer.getAmount()) == -1)
             return null;
 
         transferRepository.save(transfer);
-        accountRepository.save(account);
+        accountRepository.save(transfer.getAccount());
 
         return new TransferResponse(transfer);
     }
@@ -81,13 +77,4 @@ public class TransferServiceImplements implements TransferService {
                 transfer.getAccount().getUser().getName(),
                 jdbcTemplate.queryForObject(sql, Float.class));
     }
-
-    private Category searchCategoria(UUID id) {
-        return categoryRepository.findById(id).orElse(null);
-    }
-
-    private Account searchAccount(UUID id) {
-        return accountRepository.findById(id).orElse(null);
-    }
-
 }

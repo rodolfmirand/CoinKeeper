@@ -1,5 +1,8 @@
 package CoinKeeper.model.user.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum UserRole {
     
     ADMIN("admin"),
@@ -11,7 +14,4 @@ public enum UserRole {
         this.role = role;
     }
 
-    public String getRole() {
-        return role;
-    }
 }
